@@ -41,8 +41,8 @@ def get_ship_location():
     row = input('Enter a ship row 1 - 8')
     while row not in '12345678':
         print('Please enter a valid row')
-        row = input('Enter a ship row 1 - 8')
-    column = input('Enter a ship column A - H').upper()
+        row = input('Enter a ship row 1 - 8\n')
+    column = input('Enter a ship column A - H\n').upper()
     while column not in 'ABCDEFGH':
         print('Please print a valid column')
         column = input('Enter a ship column A - H').upper()
@@ -80,12 +80,12 @@ while turns > 0:
         turns -= 1
     else:
         print("Sorry you've missed")
-        GUESS_BOARD [row][column] = '-'
+        GUESS_BOARD[row][column] = '-'
         turns -= 1
     if count_hit_ships(GUESS_BOARD) == 5:
-        print('Congrats! You've sunk all the battleships!)
+        print('Congrats! You sunk all the battleships!')
         break
-    print('You have ' + str(turns) + ' turns remaining')
-    if turns = 0
+        print('You have ' + str(turns) + ' turns remaining')
+    if turns == 0:
         print('Game Over')
         break
