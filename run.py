@@ -16,8 +16,8 @@ GUESS_BOARD = [[' '] * 8 for x in range (8)]
 letters_to_numbers = {'A':0, 'B':1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7,  }
 
 def print_board(board):
-    print('     A B C D E F G H')
-    print('     ---------------')
+    print('  A B C D E F G H')
+    print('  ---------------')
     row_number = 1
     for row in board:
         print("%d|%s|" % (row_number, "|".join(row)))
@@ -38,14 +38,15 @@ def get_ship_location():
     """
     choose ship location, row & column
     """
-    row = input('Enter a ship row 1 - 8')
-    while row not in '12345678':
-        print('Please enter a valid row')
-        row = input('Enter a ship row 1 - 8\n')
-    column = input('Enter a ship column A - H\n').upper()
+    column = input('Enter a ship column A - H: ').upper()
     while column not in 'ABCDEFGH':
         print('Please print a valid column')
-        column = input('Enter a ship column A - H').upper()
+        column = input('Enter a ship column A - H: ').upper()
+    row = input('Enter a ship row 1 - 8: ')
+    while row not in '12345678':
+        print('Please enter a valid row')
+        row = input('Enter a ship row 1 - 8: ')
+    
     return int(row) - 1, letters_to_numbers[column]
 
 def count_hit_ships(board):
