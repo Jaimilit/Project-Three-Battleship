@@ -55,12 +55,49 @@ def create_grid_and_place_ships(start_row, end_row, start_col, end_col):
     return all_valid
     """
 
+"""
+    delta_row, delta_col = 0,0
+    start_col, start_row = 0, 0
+
+    if direction =="left":
+        delta_col = -1
+        start_col = col - length + 1
+    
+    elif direction == "right":
+        delta_col = 1
+        end_col = col + length 
+
+    elif direction == "up":
+        delta_row = -1
+        start_row = row + 1
+
+    elif direction == "down":
+        delta_row = 1
+        end_row = row + length
+
+    if (
+        start_col < 0 or start_col >= grid_size or
+        end_col < 0 or end_col >= grid_size or
+        start_row < 0 or start_row >= grid_size or
+        end_row < 0 or end_col >= grid
+    ):
+
+        return False
+
+    for i in range(length):
+        check_row = row + i * delta_row
+        check_col = col + i * delta_col
+        if grid[check_row][check_col] != ".":
+            return False
+
+    create_grid_and_place_ships(start_row, end_row, start_col, end_col)
+    return True
+"""
 def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
     """
     global grid_size
-
     start_row, end_row, start_col, end_col = row, row + 1, col, col + 1
     if direction == "left":
         if col - length < 0:
@@ -83,13 +120,14 @@ def place_ships(row, col, direction, length):
         end_row = row + length
 
     return create_grid_and_place_ships(start_row, end_row, start_col, end_col)
+    
 
 
-def create_grid():
+def create_grid():     
     """
-    creates a 10x10 grid & randomly place ships
-       of different sizes in different directions
-       """
+    creates a 10x10 grid and randomly places ships
+    of different sizes in different directions
+    """
     global grid
     global grid_size
     global num_of_ships
