@@ -1,12 +1,9 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows highig
 
-
+# Legend
 #  "." = water or empty space
 #  "O" = part of ship
-#  "X" = part of ship that was hit with bullet
-#  "#" = water that was shot with bullet, a miss because it hit no ship
+#  "X" = part of ship that was hit by a shot
+#  "#" = a shot that missed and lands in water
 
 import random
 import time
@@ -30,7 +27,7 @@ ship_positions = [[]]
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
-def validate_grid_and_place_ship(start_row, end_row, start_col, end_col):
+def create_grid_and_place_ships(start_row, end_row, start_col, end_col):
     """
     Checks rows & columns for ship placement
     """
@@ -51,7 +48,7 @@ def validate_grid_and_place_ship(start_row, end_row, start_col, end_col):
     return all_valid
 
 
-def try_to_place_ship_on_grid(row, col, direction, length):
+def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
     """
@@ -78,7 +75,7 @@ def try_to_place_ship_on_grid(row, col, direction, length):
             return False
         end_row = row + length
 
-    return validate_grid_and_place_ship(start_row, end_row, start_col, end_col)
+    return create_grid_and_place_ships(start_row, end_row, start_col, end_col)
 
 
 def create_grid():
@@ -111,7 +108,7 @@ def create_grid():
         random_col = random.randint(0, cols - 1)
         direction = random.choice(["left", "right", "up", "down"])
         ship_size = random.randint(3, 5)
-        if try_to_place_ship_on_grid(random_row, random_col, direction, ship_size):
+        if place_ships(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
 
 
@@ -144,7 +141,7 @@ def print_grid():
     print("")
 
 
-def accept_valid_bullet_placement():
+def accept_valid_placement():
     """
     Will get valid row and column to place shot
     """
@@ -203,7 +200,7 @@ def check_for_ship_sunk(row, col):
     return True
 
 
-def shoot_bullet():
+def attempt_shot():
     """
     Updates grid and ships based on where the shot was located
     """
@@ -211,7 +208,7 @@ def shoot_bullet():
     global num_of_ships_sunk
     global shots_left
 
-    row, col = accept_valid_bullet_placement()
+    row, col = accept_valid_placement()
     print("")
     print("----------------------------")
 
@@ -222,10 +219,10 @@ def shoot_bullet():
         print("You hit!", end=" ")
         grid[row][col] = "X"
         if check_for_ship_sunk(row, col):
-            print("A ship was completely sunk!")
+            print("Yay! A ship was completely sunk!")
             num_of_ships_sunk += 1
         else:
-            print("A ship was shot")
+            print("Good job. A ship was shot")
 
     shots_left -= 1
 
@@ -240,7 +237,7 @@ def check_for_game_over():
     global game_over
 
     if num_of_ships == num_of_ships_sunk:
-        print("Congrats you won!")
+        print("Congrats you won the game!")
         game_over = True
     elif shots_left <= 0:
         print("Sorry, you lost! You ran out of shots, try again next time!")
@@ -262,7 +259,7 @@ def main():
         print_grid()
         print("Number of ships remaining: " + str(num_of_ships - num_of_ships_sunk))
         print("Number of shots left: " + str(shots_left))
-        shoot_bullet()
+        attempt_shot()
         print("----------------------------")
         print("")
         check_for_game_over()
