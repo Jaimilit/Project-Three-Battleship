@@ -8,32 +8,39 @@
 import random
 import time
 
-
-# Global variable for grid
+# Constant & Global Variables
 grid = [[]]
-# Global variable for grid size
 grid_size = 10
-# Global variable for number of ships placed on grid
 num_of_ships = 5
-# Global variable for shots left
 shots_left = 25
-# Global variable for game over
 game_over = False
-# Global variable for number of ships sunk
 num_of_ships_sunk = 0
-# Global variable for ship positions
 ship_positions = [[]]
-# Global variable for alphabet
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def create_grid_and_place_ships(start_row, end_row, start_col, end_col):
     """
-    Checks rows & columns for ship placement
+    Checks rows & columns for ship placement and updates the grid and ship positions
+    Returns true if ship placement is valid
     """
     global grid
     global ship_positions
 
+    for row in range(start_row, end_row):
+        for col in range(start_col, end_col):
+            if grid[row][col] != ".":
+                return False
+
+    ship_positions.append([start_row, end_row, start_col, end_col])
+
+    for row in range(start_row, end_row):
+        for col in range(start_col, end_col):
+            if grid[row][col] != "O":
+    
+                return True
+
+    """
     all_valid = True
     for r in range(start_row, end_row):
         for c in range(start_col, end_col):
@@ -46,7 +53,7 @@ def create_grid_and_place_ships(start_row, end_row, start_col, end_col):
             for c in range(start_col, end_col):
                 grid[r][c] = "O"
     return all_valid
-
+    """
 
 def place_ships(row, col, direction, length):
     """
