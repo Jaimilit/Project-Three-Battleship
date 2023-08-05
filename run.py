@@ -8,63 +8,66 @@
 import random
 import time
 
-# Constant & Global Variables
-grid = [[]]
+# Constant Variables
+
 grid_size = 10
 num_of_ships = 5
 shots_left = 25
 game_over = False
 num_of_ships_sunk = 0
-ship_positions = [[]]
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+# Global Variables
+ship_positions = [[]]
+grid = [[]]
 
 
 def create_grid_and_check_location(start_row, end_row, start_col, end_col):
     """
     Checks rows & columns for ship placement and updates the grid and ship positions
     Returns true if ship placement is valid
-    """
+    
     global grid
     global ship_positions
 
-    for row in range(start_row, end_row):
-        for col in range(start_col, end_col):
-            if grid[row][col] != ".":
+    for r in range(start_row, end_row):
+        for c in range(start_col, end_col):
+            if grid[r][c] != ".":
                 return False
 
     ship_positions.append([start_row, end_row, start_col, end_col])
 
-    for row in range(start_row, end_row):
-        for col in range(start_col, end_col):
-            if grid[row][col] != "O":
+    for r in range(start_row, end_row):
+        for c in range(start_col, end_col):
+            if grid[r][c] != "O":
     
                 return True
 
     """
-    OLD CODE
+# OLD CODE
     global grid
     global ship_positions
 
     all_valid = True
+    for r in range(start_row, end_row):
+        for c in range(start_col, end_col):
+            if grid[r][c] != ".":
+                all_valid = False
+                break
+    if all_valid:
+        ship_positions.append([start_row, end_row, start_col, end_col])
         for r in range(start_row, end_row):
             for c in range(start_col, end_col):
-                if grid[r][c] != ".":
-                    all_valid = False
-                    break
-        if all_valid:
-            ship_positions.append([start_row, end_row, start_col, end_col])
-            for r in range(start_row, end_row):
-                for c in range(start_col, end_col):
-                    grid[r][c] = "O"
-        return all_valid
+                grid[r][c] = "O"
+    return all_valid
 
-   """ 
+    
 
 def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
     Ensure there's no other ship there and/or not off the grid
-    """
+    
     
     global grid_size
 
@@ -81,7 +84,9 @@ def place_ships(row, col, direction, length):
     return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
     
     """
-    OLD CODE
+   # OLD CODE
+    global grid_size
+
     start_row, end_row, start_col, end_col = row, row + 1, col, col + 1
     if direction == "left":
         if col - length < 0:
@@ -105,13 +110,13 @@ def place_ships(row, col, direction, length):
 
     return create_grid_and_check_location(start_row, end_row, start_col, end_col)
     
-    """
+    
     
 def create_grid():
     """ 
     creates a grid and randomly places ships
     of different sizes in different directions
-    """
+    
     global grid
     global grid_size
     global num_of_ships
@@ -121,7 +126,7 @@ def create_grid():
 
     rows, cols = (grid_size, grid_size)
 
-    """
+
     grid = [["." for _ in range(cols)] for _ in range(rows)]
     ship_positions = []
 
@@ -131,14 +136,33 @@ def create_grid():
         direction = random.choice(["left", "right", "up", "down"])
         ship_size = random.randint(3, 5)
         if place_ships(random_row, random_col, direction, ship_size):
-            ship_positions.append((random_row, random_col))
-
+            ship_positions.append((random_row, random_col, direction, ship_size))
+            if direction == "left":
+                for col in range(random_col, random_col - ship_size, -1):
+                    grid[random_row][col] = "O"
+            elif direction == "right":
+                for col in range(random_col, random_col + ship_size):
+                    grid[random_row][col] = "O"
+            elif direction == "up":
+                for row in range(random_row, random_row - ship_size, -1):
+                    grid[row][random_col] = "O"
+            elif direction == "down":
+                for row in range(random_row, random_row + ship_size):
+                    grid[row][random_col] = "O"
     """
 # OLD CODE
+    global grid
+    global grid_size
+    global num_of_ships
+    global ship_positions
+
+    random.seed(time.time())
+
+    rows, cols = (grid_size, grid_size)
     grid = []
-    for row in range(rows):
+    for r in range(rows):
         row = []
-        for col in range(cols):
+        for c in range(cols):
             row.append(".")
         grid.append(row)
 
@@ -154,7 +178,7 @@ def create_grid():
         if place_ships(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
 
-
+    
 def print_grid():
     """
     Will print the grid with rows A-J and columns 0-9
@@ -182,13 +206,14 @@ def print_grid():
             else:
                 print(grid[row][col], end=" ")
         print("")
+       
    
     
 def accept_valid_placement():
     """
     Will get data from user (row & column) to place shot
     Writes error to user if input is incorrect
-    """
+    
     global alphabet
     global grid
     global grid_size
@@ -220,7 +245,12 @@ def accept_valid_placement():
         if grid[row][col] in {".", "O"}:
             return row, col
     """
-    OLD CODE
+   # OLD CODE
+
+    global alphabet
+    global grid
+    global grid_size
+
     is_valid_placement = False
     row = -1
     col = -1
@@ -250,17 +280,21 @@ def accept_valid_placement():
             is_valid_placement = True
 
     return row, col
-    """
+    
 
 def check_for_ship_sunk(row, col):
     """
     If all parts of a ship have been shot it is sunk and we count how many ships are sunk
-    """
+    
     global ship_positions
     global grid
 
     """
-    OLD CODE
+  #  OLD CODE
+
+    global ship_positions
+    global grid
+
     for position in ship_positions:
         start_row = position[0]
         end_row = position[1]
@@ -278,13 +312,12 @@ def check_for_ship_sunk(row, col):
             if not all(grid[r][c] == "X" for r in range(start_row, end_row + 1) for c in range(start_col, end_col + 1)):
                 return False
     return True
-
+    """
 def attempt_shot():
     """
     Updates grid and ships based on where the shot was located
     Tells user if their shot missed, hit a ship, and if a ship was completely 
     sunk
-    """
     global grid
     global num_of_ships_sunk
     global shots_left
@@ -292,7 +325,7 @@ def attempt_shot():
     row, col = accept_valid_placement()
     print("\n----------------------------")
 
-    shot_result = grid[row][col]
+    shot_result = grid[r][c]
     if shot_result == ".":
         print("Sorry, you missed! No ship was shot")
         grid[row][col] = "M"
@@ -308,7 +341,11 @@ def attempt_shot():
     shots_left -= 1
 
     """
-    OLD CODE
+   # OLD CODE
+    global grid
+    global num_of_ships_sunk
+    global shots_left
+
     row, col = accept_valid_placement()
     print("")
     print("----------------------------")
@@ -326,7 +363,7 @@ def attempt_shot():
             print("Good job! A ship was shot")
 
     shots_left -= 1
-    """
+    
 
 def check_for_game_over():
     """
