@@ -211,7 +211,8 @@ def print_grid():
     
 def accept_valid_placement():
     """
-    Will get data & valid row and column to place shot from the user
+    Will get data from user (row & column) to place shot
+    Writes error to user if input is incorrect
     """
     global alphabet
     global grid
@@ -220,7 +221,7 @@ def accept_valid_placement():
     row = -1
     col = -1
     while is_valid_placement is False:
-        placement = input("Enter row A-J and column 0-9. Example C6: ")
+        placement = input("Please enter row A-J and column 0-9. Example C6: ")
         placement = placement.upper()
         if len(placement) <= 0 or len(placement) > 2:
             print("Error: Please enter only one row and column such as C6:")
@@ -320,15 +321,20 @@ def main():
     """
     global game_over
 
+    print()
     print("-----Welcome to Battleships-----")
-    print("You have 25 shots to take down 5 ships, may the battle begin!")
+    print()
+    print("You have 25 shots to take down 5 ships. Let the battle begin!")
+    print()
 
     create_grid()
 
     while game_over is False:
         print_grid()
+        print()
         print("Number of ships remaining: " + str(num_of_ships - num_of_ships_sunk))
         print("Number of shots left: " + str(shots_left))
+        print()
         attempt_shot()
         print("----------------------------")
         print("")
