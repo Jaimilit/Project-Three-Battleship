@@ -117,40 +117,8 @@ def create_grid():
     """ 
     creates a grid and randomly places ships
     of different sizes in different directions
-    
-    global grid
-    global grid_size
-    global num_of_ships
-    global ship_positions
-
-    random.seed(time.time())
-
-    rows, cols = (grid_size, grid_size)
-
-
-    grid = [["." for _ in range(cols)] for _ in range(rows)]
-    ship_positions = []
-
-    while len(ship_positions) < num_of_ships:
-        random_row = random.randint(0, rows - 1)
-        random_col = random.randint(0, cols - 1)
-        direction = random.choice(["left", "right", "up", "down"])
-        ship_size = random.randint(3, 5)
-        if place_ships(random_row, random_col, direction, ship_size):
-            ship_positions.append((random_row, random_col, direction, ship_size))
-            if direction == "left":
-                for col in range(random_col, random_col - ship_size, -1):
-                    grid[random_row][col] = "O"
-            elif direction == "right":
-                for col in range(random_col, random_col + ship_size):
-                    grid[random_row][col] = "O"
-            elif direction == "up":
-                for row in range(random_row, random_row - ship_size, -1):
-                    grid[row][random_col] = "O"
-            elif direction == "down":
-                for row in range(random_row, random_row + ship_size):
-                    grid[row][random_col] = "O"
     """
+   
 # OLD CODE
     global grid
     global grid_size
