@@ -41,63 +41,31 @@ def create_grid_and_check_location(start_row, end_row, start_col, end_col):
                 return True
 
     """
+    OLD CODE
+    global grid
+    global ship_positions
+
     all_valid = True
-    for r in range(start_row, end_row):
-        for c in range(start_col, end_col):
-            if grid[r][c] != ".":
-                all_valid = False
-                break
-    if all_valid:
-        ship_positions.append([start_row, end_row, start_col, end_col])
         for r in range(start_row, end_row):
             for c in range(start_col, end_col):
-                grid[r][c] = "O"
-    return all_valid
-    """
+                if grid[r][c] != ".":
+                    all_valid = False
+                    break
+        if all_valid:
+            ship_positions.append([start_row, end_row, start_col, end_col])
+            for r in range(start_row, end_row):
+                for c in range(start_col, end_col):
+                    grid[r][c] = "O"
+        return all_valid
 
-"""
-    delta_row, delta_col = 0,0
-    start_col, start_row = 0, 0
+   """ 
 
-    if direction =="left":
-        delta_col = -1
-        start_col = col - length + 1
-    
-    elif direction == "right":
-        delta_col = 1
-        end_col = col + length 
-
-    elif direction == "up":
-        delta_row = -1
-        start_row = row + 1
-
-    elif direction == "down":
-        delta_row = 1
-        end_row = row + length
-
-    if (
-        start_col < 0 or start_col >= grid_size or
-        end_col < 0 or end_col >= grid_size or
-        start_row < 0 or start_row >= grid_size or
-        end_row < 0 or end_col >= grid
-    ):
-
-        return False
-
-    for i in range(length):
-        check_row = row + i * delta_row
-        check_col = col + i * delta_col
-        if grid[check_row][check_col] != ".":
-            return False
-
-    create_grid_and_check_location(start_row, end_row, start_col, end_col)
-    return True
-"""
 def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
     Ensure there's no other ship there and/or not off the grid
     """
+    
     global grid_size
 
     delta = 1 if direction in {"right", "down"} else -1
@@ -111,8 +79,9 @@ def place_ships(row, col, direction, length):
         start_col, end_col = col, col + 1
 
     return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
+    
     """
-(Cut this - old function example)
+    OLD CODE
     start_row, end_row, start_col, end_col = row, row + 1, col, col + 1
     if direction == "left":
         if col - length < 0:
@@ -137,14 +106,39 @@ def place_ships(row, col, direction, length):
     return create_grid_and_check_location(start_row, end_row, start_col, end_col)
     
     """
+    
 def create_grid():
     """ 
     creates a grid and randomly places ships
     of different sizes in different directions
+    """
+    global grid
+    global grid_size
+    global num_of_ships
+    global ship_positions
+
+    random.seed(time.time())
+
+    rows, cols = (grid_size, grid_size)
+
+    """
+    grid = [["." for _ in range(cols)] for _ in range(rows)]
+    ship_positions = []
+
+    while len(ship_positions) < num_of_ships:
+        random_row = random.randint(0, rows - 1)
+        random_col = random.randint(0, cols - 1)
+        direction = random.choice(["left", "right", "up", "down"])
+        ship_size = random.randint(3, 5)
+        if place_ships(random_row, random_col, direction, ship_size):
+            ship_positions.append((random_row, random_col))
+
+    """
+# OLD CODE
     grid = []
-    for r in range(rows):
+    for row in range(rows):
         row = []
-        for c in range(cols):
+        for col in range(cols):
             row.append(".")
         grid.append(row)
 
@@ -159,26 +153,7 @@ def create_grid():
         ship_size = random.randint(3, 5)
         if place_ships(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
-    """
-    global grid
-    global grid_size
-    global num_of_ships
-    global ship_positions
 
-    random.seed(time.time())
-
-    rows, cols = (grid_size, grid_size)
-
-    grid = [["." for _ in range(cols)] for _ in range(rows)]
-    ship_positions = []
-
-    while len(ship_positions) < num_of_ships:
-        random_row = random.randint(0, rows - 1)
-        random_col = random.randint(0, cols - 1)
-        direction = random.choice(["left", "right", "up", "down"])
-        ship_size = random.randint(3, 5)
-        if place_ships(random_row, random_col, direction, ship_size):
-            ship_positions.append((random_row, random_col))
 
 def print_grid():
     """
@@ -245,6 +220,7 @@ def accept_valid_placement():
         if grid[row][col] in {".", "O"}:
             return row, col
     """
+    OLD CODE
     is_valid_placement = False
     row = -1
     col = -1
@@ -284,6 +260,7 @@ def check_for_ship_sunk(row, col):
     global grid
 
     """
+    OLD CODE
     for position in ship_positions:
         start_row = position[0]
         end_row = position[1]
@@ -331,6 +308,7 @@ def attempt_shot():
     shots_left -= 1
 
     """
+    OLD CODE
     row, col = accept_valid_placement()
     print("")
     print("----------------------------")
