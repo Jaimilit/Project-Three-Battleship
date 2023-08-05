@@ -119,7 +119,7 @@ def create_grid():
     of different sizes in different directions
     """
    
-# OLD CODE
+# OLD CODE COME BACK TO THIS ONE
     global grid
     global grid_size
     global num_of_ships
@@ -151,7 +151,9 @@ def create_grid():
 def print_grid():
     """
     Will print the grid with rows A-J and columns 0-9
+    COME BACK TO THIS ONE TOO
     """
+    #OLD CODE
     global grid
     global alphabet
 
@@ -175,14 +177,13 @@ def print_grid():
             else:
                 print(grid[row][col], end=" ")
         print("")
-       
    
     
 def accept_valid_placement():
     """
     Will get data from user (row & column) to place shot
     Writes error to user if input is incorrect
-    
+    """
     global alphabet
     global grid
     global grid_size
@@ -250,7 +251,7 @@ def accept_valid_placement():
 
     return row, col
     
-
+"""
 def check_for_ship_sunk(row, col):
     """
     If all parts of a ship have been shot it is sunk and we count how many ships are sunk
