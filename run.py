@@ -111,7 +111,7 @@ def place_ships(row, col, direction, length):
         start_col, end_col = col, col + 1
 
     return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
-"""
+    """
 (Cut this - old function example)
     start_row, end_row, start_col, end_col = row, row + 1, col, col + 1
     if direction == "left":
@@ -136,23 +136,12 @@ def place_ships(row, col, direction, length):
 
     return create_grid_and_check_location(start_row, end_row, start_col, end_col)
     
-"""
+    """
 def create_grid():
     """ 
     come back to this one!!!!!!!!
     creates a grid and randomly places ships
     of different sizes in different directions
-    """
-
-    global grid
-    global grid_size
-    global num_of_ships
-    global ship_positions
-
-    random.seed(time.time())
-
-    rows, cols = (grid_size, grid_size)
-
     grid = []
     for r in range(rows):
         row = []
@@ -171,6 +160,26 @@ def create_grid():
         ship_size = random.randint(3, 5)
         if place_ships(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
+    """
+    global grid
+    global grid_size
+    global num_of_ships
+    global ship_positions
+
+    random.seed(time.time())
+
+    rows, cols = (grid_size, grid_size)
+
+    grid = [["." for _ in range(cols)] for _ in range(rows)]
+    ship_positions = []
+
+    while len(ship_positions) < num_of_ships:
+        random_row = random.randint(0, rows - 1)
+        random_col = random.randint(0, cols - 1)
+        direction = random.choice(["left", "right", "up", "down"])
+        ship_size = random.randint(3, 5)
+        if place_ships(random_row, random_col, direction, ship_size):
+            ship_positions.append((random_row, random_col))
 
 def print_grid():
     """
@@ -199,10 +208,58 @@ def print_grid():
             else:
                 print(grid[row][col], end=" ")
         print("")
-
+    """
     
+    global grid
+    global grid_size
+    global num_of_ships
+    global ship_positions
 
+    random.seed(time.time())
 
+    rows, cols = (grid_size, grid_size)
+
+    grid = [["." for _ in range(cols)] for _ in range(rows)]
+    ship_positions = []
+
+    while len(ship_positions) < num_of_ships:
+        random_row = random.randint(0, rows - 1)
+        random_col = random.randint(0, cols - 1)
+        direction = random.choice(["left", "right", "up", "down"])
+        ship_size = random.randint(3, 5)
+        if place_ships(random_row, random_col, direction, ship_size):
+            ship_positions.append((random_row, random_col))
+    """
+def print_grid():
+    """
+    Will print the grid with rows A-J and columns 0-9
+    """
+    
+    global grid
+    global alphabet
+    
+    debug_mode = True
+    
+    alphabet = alphabet[0: len(grid) + 1]
+
+    print("  ", end=" ")
+    for i in range(len(grid[0])):
+        print(str(i), end=" ")
+    print("")
+
+    for row in range(len(grid)):
+        print(alphabet[row], end=") ")
+        for col in range(len(grid[row])):
+            if grid[row][col] == "O":
+                if debug_mode:
+                    print("O", end=" ")
+                else:
+                    print(".", end=" ")
+            else:
+                print(grid[row][col], end=" ")
+        print("")
+    
+    
 def accept_valid_placement():
     """
     Will get data & valid row and column to place shot from the user
