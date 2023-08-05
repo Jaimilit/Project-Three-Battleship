@@ -311,13 +311,32 @@ def attempt_shot():
     global grid
     global num_of_ships_sunk
     global shots_left
+    
+    row, col = accept_valid_placement()
+    print("\n----------------------------")
 
+    shot_result = grid[row][col]
+    if shot_result == ".":
+        print("Sorry, you missed! No ship was shot")
+        grid[row][col] = "M"
+    elif shot_result == "O":
+        print("You hit!", end=" ")
+        grid[row][col] = "X"
+        if check_for_ship_sunk(row, col):
+            print("Yay! A ship was completely sunk!")
+            num_of_ships_sunk += 1
+        else:
+            print("Good job! A ship was shot")
+
+    shots_left -= 1
+
+    """
     row, col = accept_valid_placement()
     print("")
     print("----------------------------")
 
     if grid[row][col] == ".":
-        print("You missed, no ship was shot")
+        print("Sorry you missed! No ship was shot")
         grid[row][col] = "M"
     elif grid[row][col] == "O":
         print("You hit!", end=" ")
@@ -326,10 +345,10 @@ def attempt_shot():
             print("Yay! A ship was completely sunk!")
             num_of_ships_sunk += 1
         else:
-            print("Good job. A ship was shot")
+            print("Good job! A ship was shot")
 
     shots_left -= 1
-
+    """
 
 def check_for_game_over():
     """
@@ -350,7 +369,7 @@ def check_for_game_over():
 
 def main():
     """
-    Main entry point of application that runs the game loop
+    Main application that runs the game and its functions
     """
     global game_over
 
