@@ -362,7 +362,7 @@ def main():
     global game_over
 
     print()
-    print("-----Welcome to Battleships-----")
+    print("\n-----Welcome to Battleships-----\n")
     print()
     print("You have 25 shots to take down 5 ships. Let the battle begin!")
     print()
