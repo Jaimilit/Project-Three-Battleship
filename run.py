@@ -137,11 +137,12 @@ def place_ships(row, col, direction, length):
     return create_grid_and_check_location(start_row, end_row, start_col, end_col)
     
 """
-def create_grid():     
-    """
-    creates a 10x10 grid and randomly places ships
+def create_grid():
+    """ 
+    creates a grid and randomly places ships
     of different sizes in different directions
     """
+    
     global grid
     global grid_size
     global num_of_ships
@@ -170,10 +171,9 @@ def create_grid():
         if place_ships(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
 
-
 def print_grid():
     """
-    Will print the grid with rows A-J and columns 0-9
+    Will print the grid with rows A-J and columns 1-10
     """
     global grid
     global alphabet
