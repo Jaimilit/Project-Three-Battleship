@@ -68,7 +68,7 @@ def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
     Ensure there's no other ship there and/or not off the grid
-    
+    """
     
     global grid_size
 
@@ -111,7 +111,7 @@ def place_ships(row, col, direction, length):
 
     return create_grid_and_check_location(start_row, end_row, start_col, end_col)
     
-    
+    """
     
 def create_grid():
     """ 
