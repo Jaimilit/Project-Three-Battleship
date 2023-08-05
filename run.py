@@ -99,6 +99,20 @@ def place_ships(row, col, direction, length):
     Ensure there's no other ship there and/or not off the grid
     """
     global grid_size
+
+    delta = 1 if direction in {"right", "down"} else -1
+    
+    if direction in {"left", "right"}:
+        start_col, end_col = col - length + 1, col + delta
+        start_row, end_row = row, row + 1
+
+    elif direction in {"up", "down"}:
+        start_row, end_row = row - length + 1, row + delta
+        start_col, end_col = col, col + 1
+
+    return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
+"""
+(Cut this - old function example)
     start_row, end_row, start_col, end_col = row, row + 1, col, col + 1
     if direction == "left":
         if col - length < 0:
@@ -122,8 +136,7 @@ def place_ships(row, col, direction, length):
 
     return create_grid_and_check_location(start_row, end_row, start_col, end_col)
     
-
-
+"""
 def create_grid():     
     """
     creates a 10x10 grid and randomly places ships
