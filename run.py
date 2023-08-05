@@ -3,7 +3,7 @@
 #  "." = water or empty space
 #  "O" = part of ship
 #  "X" = part of ship that was hit by a shot
-#  "#" = a shot that missed and lands in water
+#  "M" = a shot that missed and lands in water
 
 import random
 import time
@@ -19,7 +19,7 @@ ship_positions = [[]]
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
-def create_grid_and_place_ships(start_row, end_row, start_col, end_col):
+def create_grid_and_check_location(start_row, end_row, start_col, end_col):
     """
     Checks rows & columns for ship placement and updates the grid and ship positions
     Returns true if ship placement is valid
@@ -90,12 +90,13 @@ def create_grid_and_place_ships(start_row, end_row, start_col, end_col):
         if grid[check_row][check_col] != ".":
             return False
 
-    create_grid_and_place_ships(start_row, end_row, start_col, end_col)
+    create_grid_and_check_location(start_row, end_row, start_col, end_col)
     return True
 """
 def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
+    Ensure there's no other ship there and/or not off the grid
     """
     global grid_size
     start_row, end_row, start_col, end_col = row, row + 1, col, col + 1
@@ -119,7 +120,7 @@ def place_ships(row, col, direction, length):
             return False
         end_row = row + length
 
-    return create_grid_and_place_ships(start_row, end_row, start_col, end_col)
+    return create_grid_and_check_location(start_row, end_row, start_col, end_col)
     
 
 
@@ -188,7 +189,7 @@ def print_grid():
 
 def accept_valid_placement():
     """
-    Will get valid row and column to place shot
+    Will get data & valid row and column to place shot from the user
     """
     global alphabet
     global grid
@@ -215,7 +216,7 @@ def accept_valid_placement():
         if not (-1 < col < grid_size):
             print("Error: Please enter letter A-J for row and 0-9 for column")
             continue
-        if grid[row][col] == "#" or grid[row][col] == "X":
+        if grid[row][col] == "M" or grid[row][col] == "X":
             print("You have already made this shot. Try another location")
             continue
         if grid[row][col] == "." or grid[row][col] == "O":
@@ -226,7 +227,7 @@ def accept_valid_placement():
 
 def check_for_ship_sunk(row, col):
     """
-    If all parts of a shit have been shot it is sunk and we count how many ships sunk
+    If all parts of a ship have been shot it is sunk and we count how many ships sunk
     """
     global ship_positions
     global grid
@@ -248,6 +249,8 @@ def check_for_ship_sunk(row, col):
 def attempt_shot():
     """
     Updates grid and ships based on where the shot was located
+    Tells user if their shot missed, hit a ship, and if a ship was completely 
+    sunk
     """
     global grid
     global num_of_ships_sunk
@@ -259,7 +262,7 @@ def attempt_shot():
 
     if grid[row][col] == ".":
         print("You missed, no ship was shot")
-        grid[row][col] = "#"
+        grid[row][col] = "M"
     elif grid[row][col] == "O":
         print("You hit!", end=" ")
         grid[row][col] = "X"
@@ -274,7 +277,7 @@ def attempt_shot():
 
 def check_for_game_over():
     """
-    If all ships have been sunk or we run out of shots its game over
+    Game over if all ships have been sunk or if the user has run out of shots
     """
     global num_of_ships_sunk
     global num_of_ships
