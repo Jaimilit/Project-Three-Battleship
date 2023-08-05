@@ -216,7 +216,35 @@ def accept_valid_placement():
     """
     global alphabet
     global grid
+    global grid_size
 
+    while True:
+        placement = input("Please enter row A-J and column 0-9. Example C6: ").upper()
+
+        if len(placement) != 2:
+            print("Error: Please enter a valid input such as C6.")
+            continue
+
+        row, col = placement
+
+        if not row.isalpha() or not col.isdigit():
+            print("Error: Please enter letter A-J for row and 0-9 for column.")
+            continue
+
+        row = alphabet.find(row)
+        col = int(col)
+
+        if not (-1 < row < grid_size) or not (-1 < col < grid_size):
+            print("Error: Please enter valid row A-J and column 0-9.")
+            continue
+
+        if grid[row][col] in {"M", "X"}:
+            print("You have already made this shot. Try another location.")
+            continue
+
+        if grid[row][col] in {".", "O"}:
+            return row, col
+    """
     is_valid_placement = False
     row = -1
     col = -1
@@ -246,7 +274,7 @@ def accept_valid_placement():
             is_valid_placement = True
 
     return row, col
-
+    """
 
 def check_for_ship_sunk(row, col):
     """
