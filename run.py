@@ -139,10 +139,11 @@ def place_ships(row, col, direction, length):
 """
 def create_grid():
     """ 
+    come back to this one!!!!!!!!
     creates a grid and randomly places ships
     of different sizes in different directions
     """
-    
+
     global grid
     global grid_size
     global num_of_ships
@@ -173,14 +174,19 @@ def create_grid():
 
 def print_grid():
     """
-    Will print the grid with rows A-J and columns 1-10
+    Will print the grid with rows A-J and columns 0-9
     """
     global grid
     global alphabet
 
-    debug_mode = False
-
+    debug_mode = True
+    
     alphabet = alphabet[0: len(grid) + 1]
+
+    print("  ", end=" ")
+    for i in range(len(grid[0])):
+        print(str(i), end=" ")
+    print("")
 
     for row in range(len(grid)):
         print(alphabet[row], end=") ")
@@ -194,10 +200,7 @@ def print_grid():
                 print(grid[row][col], end=" ")
         print("")
 
-    print("  ", end=" ")
-    for i in range(len(grid[0])):
-        print(str(i), end=" ")
-    print("")
+    
 
 
 def accept_valid_placement():
