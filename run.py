@@ -26,7 +26,8 @@ def create_grid_and_check_location(start_row, end_row, start_col, end_col):
     """
     Checks rows & columns for ship placement and updates the grid and ship positions
     Returns true if ship placement is valid
-    
+    """
+
     global grid
     global ship_positions
 
@@ -39,11 +40,11 @@ def create_grid_and_check_location(start_row, end_row, start_col, end_col):
 
     for r in range(start_row, end_row):
         for c in range(start_col, end_col):
-            if grid[r][c] != "O":
-    
-                return True
+            grid[r][c] = "O"
 
-    """
+    return True
+
+"""
 # OLD CODE
     global grid
     global ship_positions
@@ -62,7 +63,7 @@ def create_grid_and_check_location(start_row, end_row, start_col, end_col):
     return all_valid
 
     
-
+"""
 def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
