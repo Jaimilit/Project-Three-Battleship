@@ -256,6 +256,7 @@ def check_for_ship_sunk(row, col):
     """
     If all parts of a ship have been shot it is sunk and we count how many ships are sunk
     
+    #THIS ONE ISN'T WORKING
     global ship_positions
     global grid
     for start_row, end_row, start_col, end_col in ship_positions:
@@ -288,7 +289,8 @@ def attempt_shot():
     Updates grid and ships based on where the shot was located
     Tells user if their shot missed, hit a ship, and if a ship was completely 
     sunk
-    
+     #THIS ONE ISN'T WORKING
+
     global grid
     global num_of_ships_sunk
     global shots_left
