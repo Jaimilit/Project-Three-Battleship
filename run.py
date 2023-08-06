@@ -108,6 +108,7 @@ def create_grid():
             num_of_ships_placed += 1
     """
 
+
 def print_grid():
     """
     Will print the grid with rows A-J and columns 0-9
@@ -132,7 +133,7 @@ def print_grid():
             else:
                 print(cell, end=" ")
         print()
-   
+
 
 def accept_valid_placement():
     """
@@ -170,22 +171,21 @@ def accept_valid_placement():
 
         if grid[row][col] in {".", "O"}:
             return row, col
-   
+
 
 def check_for_ship_sunk(row, col):
     """
     If all parts of a ship have been shot it is sunk and we count how many ships are sunk
-    """ 
-
+    """
+    
     global ship_positions
     global grid
 
     for start_row, end_row, start_col, end_col in ship_positions:
         if start_row <= row <= end_row and start_col <= col <= end_col:
             return all(grid[r][c] == "X" for r in range(start_row, end_row) for c in range(start_col, end_col))
-    
     return False
-   
+
 
 def attempt_shot():
     """
@@ -214,7 +214,7 @@ def attempt_shot():
             print("Good job! A ship was hit!")
 
     shots_left -= 1
-    
+
 
 def check_for_game_over():
     """
@@ -260,5 +260,5 @@ def main():
         print("")
         check_for_game_over()
 
-main()
 
+main()
