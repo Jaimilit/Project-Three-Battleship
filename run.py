@@ -264,17 +264,17 @@ def accept_valid_placement():
 def check_for_ship_sunk(row, col):
     """
     If all parts of a ship have been shot it is sunk and we count how many ships are sunk
-    
-    #THIS ONE ISN'T WORKING
+    """ 
+
     global ship_positions
     global grid
+
     for start_row, end_row, start_col, end_col in ship_positions:
         if start_row <= row <= end_row and start_col <= col <= end_col:
-            if not all(grid[r][c] == "X" for r in range(start_row, end_row + 1) for c in range(start_col, end_col + 1)):
-                return False
-    return True
-
-"""    
+            return all(grid[r][c] == "X" for r in range(start_row, end_row) for c in range(start_col, end_col))
+    
+    return False
+    """
   #  OLD CODE
 
     global ship_positions
@@ -292,15 +292,13 @@ def check_for_ship_sunk(row, col):
                         return False
     return True
     
-
+    """
 def attempt_shot():
     """
     Updates grid and ships based on where the shot was located
     Tells user if their shot missed, hit a ship, and if a ship was completely 
     sunk
-     #THIS ONE ISN'T WORKING
     """
-   # OLD CODE
     global grid
     global num_of_ships_sunk
     global shots_left
@@ -322,7 +320,6 @@ def attempt_shot():
             print("Good job! A ship was hit!")
 
     shots_left -= 1
-    
     
 def check_for_game_over():
     """
