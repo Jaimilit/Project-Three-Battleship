@@ -61,9 +61,13 @@ def place_ships(row, col, direction, length):
         start_row, end_row = row - length + 1, row + delta
         start_col, end_col = col, col + 1
 
+<<<<<<< HEAD
     return (0 <= start_col < grid_size) and \
         (0 <= start_row < grid_size) and \
         create_grid_and_check_location(start_row, end_row, start_col, end_col)
+=======
+    return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
+>>>>>>> 24b5828 (made changes in format from linter)
 
 
 def create_grid():
@@ -91,6 +95,7 @@ def create_grid():
 
     ship_positions = []
 
+<<<<<<< HEAD
     while num_of_ships_placed != num_of_ships:
         random_row = random.randint(0, rows - 1)
         random_col = random.randint(0, cols - 1)
@@ -99,6 +104,8 @@ def create_grid():
         if place_ships(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
 
+=======
+>>>>>>> 24b5828 (made changes in format from linter)
     """
     while num_of_ships_placed := len(ship_positions) < num_of_ships:
         random_row, random_col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
@@ -108,6 +115,17 @@ def create_grid():
             num_of_ships_placed += 1
     """
 
+<<<<<<< HEAD
+=======
+    while num_of_ships_placed != num_of_ships:
+        random_row = random.randint(0, rows - 1)
+        random_col = random.randint(0, cols - 1)
+        direction = random.choice(["left", "right", "up", "down"])
+        ship_size = random.randint(3, 5)
+        if place_ships(random_row, random_col, direction, ship_size):
+            num_of_ships_placed += 1
+
+>>>>>>> 24b5828 (made changes in format from linter)
 
 def print_grid():
     """
@@ -183,7 +201,11 @@ def check_for_ship_sunk(row, col):
 
     for start_row, end_row, start_col, end_col in ship_positions:
         if start_row <= row <= end_row and start_col <= col <= end_col:
+<<<<<<< HEAD
             return all(grid[r][c] == "X" for r in range(start_row, end_row) for c in range(start_col, end_col))
+=======
+            return all(grid[r][c] == "X" for r in range(start_row, end_row) for c in range(start_col, end_col))  
+>>>>>>> 24b5828 (made changes in format from linter)
     return False
 
 
@@ -260,5 +282,9 @@ def main():
         print("")
         check_for_game_over()
 
+<<<<<<< HEAD
 
 main()
+=======
+main()
+>>>>>>> 24b5828 (made changes in format from linter)
