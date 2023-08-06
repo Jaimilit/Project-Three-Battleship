@@ -173,7 +173,21 @@ def check_for_ship_sunk(row, col):
     global ship_positions
     global grid
 
+    global ship_positions
+    global grid
 
+    for position in ship_positions:
+        start_row, end_row, start_col, end_col = position
+
+        if start_row <= row <= end_row and start_col <= col <= end_col:
+            for r in range(start_row, end_row):
+                for c in range(start_col, end_col):
+                    if grid[r][c] != "X":
+                        return False
+
+    return True
+
+"""
     for position in ship_positions:
         start_row = position[0]
         end_row = position[1]
@@ -185,7 +199,7 @@ def check_for_ship_sunk(row, col):
                     if grid[r][c] != "X":
                         return False
     return True
-
+    """
 def attempt_shot():
     """
     Updates grid and ships based on where the shot was located
