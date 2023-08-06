@@ -20,11 +20,13 @@ alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # Global Variables
 ship_positions = [[]]
 grid = [[]]
-
+grid
+grid_size
+num_of_ships
 
 def create_grid_and_check_location(start_row, end_row, start_col, end_col):
     """
-    Checks rows & columns for ship placement and updates the grid and ship positions
+    Checks rows & columns for ship placement and updates the grid and ship locations
     Returns true if ship placement is valid
     """
 
@@ -118,8 +120,7 @@ def create_grid():
     creates a grid and randomly places ships
     of different sizes in different directions
     """
-   
-# OLD CODE COME BACK TO THIS ONE
+    
     global grid
     global grid_size
     global num_of_ships
@@ -139,6 +140,15 @@ def create_grid():
 
     ship_positions = []
 
+    while num_of_ships_placed := len(ship_positions) < num_of_ships:
+        random_row, random_col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
+        direction = random.choice(["left", "right", "up", "down"])
+        ship_size = random.randint(3, 5)
+        if place_ships(random_row, random_col, direction, ship_size):
+            num_of_ships_placed += 1
+
+    """
+    OLD CODE
     while num_of_ships_placed != num_of_ships:
         random_row = random.randint(0, rows - 1)
         random_col = random.randint(0, cols - 1)
@@ -146,7 +156,8 @@ def create_grid():
         ship_size = random.randint(3, 5)
         if place_ships(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
-
+    """
+    
     
 def print_grid():
     """
@@ -364,7 +375,7 @@ def main():
     print()
     print("\n-----Welcome to Battleships-----\n")
     print()
-    print("You have 25 shots to take down 5 ships. Let the battle begin!")
+    print("You have 25 shots to take down 5 ships. The ships are of different sizes. Let the battle begin!")
     print()
 
     create_grid()
