@@ -8,6 +8,7 @@
 import random
 import time
 
+
 # Variables
 grid_size = 10
 num_of_ships = 5
