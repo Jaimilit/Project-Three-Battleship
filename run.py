@@ -49,7 +49,7 @@ def place_ships(row, col, direction, length):
     """
     global grid_size
 
-    delta = 1 if direction in {"right", "down"} else -1 
+    delta = 1 if direction in {"right", "down"} else -1
     if direction in {"left", "right"}:
         start_col, end_col = col - length + 1, col + delta
         start_row, end_row = row, row + 1
@@ -62,13 +62,13 @@ def place_ships(row, col, direction, length):
 
 
 def create_grid():
-    """ 
+    """
     creates a grid and randomly places ships
     of different sizes in different directions
     """
-    
-    global grid
+
     global grid_size
+    global grid
     global num_of_ships
     global ship_positions
 
@@ -161,7 +161,6 @@ def accept_valid_placement():
 def check_for_ship_sunk(row, col):
     """
     If all parts of a ship have been shot it is sunk and we count how many ships are sunk
-    
     global ship_positions
     global grid
 
@@ -187,7 +186,7 @@ def check_for_ship_sunk(row, col):
 
     return True
 
-"""
+    """
     for position in ship_positions:
         start_row = position[0]
         end_row = position[1]
@@ -200,10 +199,12 @@ def check_for_ship_sunk(row, col):
                         return False
     return True
     """
+
+
 def attempt_shot():
     """
     Updates grid and ships based on where the shot was located
-    Tells user if their shot missed, hit a ship, and if a ship was completely 
+    Tells user if their shot missed, hit a ship, and if a ship was completely
     sunk
     """
 
@@ -272,5 +273,6 @@ def main():
         print("----------------------------")
         print("")
         check_for_game_over()
+
 
 main()
