@@ -20,9 +20,7 @@ alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 # Global Variables
 ship_positions = [[]]
 grid = [[]]
-grid
-grid_size
-num_of_ships
+
 
 def create_grid_and_check_location(start_row, end_row, start_col, end_col):
     """
@@ -301,29 +299,6 @@ def attempt_shot():
     Tells user if their shot missed, hit a ship, and if a ship was completely 
     sunk
      #THIS ONE ISN'T WORKING
-
-    global grid
-    global num_of_ships_sunk
-    global shots_left
-    
-    row, col = accept_valid_placement()
-    print("\n----------------------------")
-
-    shot_result = grid[r][c]
-    if shot_result == ".":
-        print("Sorry, you missed! No ship was shot")
-        grid[row][col] = "M"
-    elif shot_result == "O":
-        print("You hit!", end=" ")
-        grid[row][col] = "X"
-        if check_for_ship_sunk(row, col):
-            print("Yay! A ship was completely sunk!")
-            num_of_ships_sunk += 1
-        else:
-            print("Good job! A ship was shot")
-
-    shots_left -= 1
-
     """
    # OLD CODE
     global grid
@@ -332,7 +307,7 @@ def attempt_shot():
 
     row, col = accept_valid_placement()
     print("")
-    print("----------------------------")
+    print("\n" + "-" * 28)
 
     if grid[row][col] == ".":
         print("Sorry you missed! No ship was hit.")
@@ -359,7 +334,7 @@ def check_for_game_over():
     global game_over
 
     if num_of_ships == num_of_ships_sunk:
-        print("Congrats! You won the game!")
+        print("Congrats! You won the game! You sunk all 5 ships!")
         game_over = True
     elif shots_left <= 0:
         print("Sorry, you lost! You ran out of shots, try again next time!")
