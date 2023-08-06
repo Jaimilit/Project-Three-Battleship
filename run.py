@@ -335,7 +335,7 @@ def attempt_shot():
     print("----------------------------")
 
     if grid[row][col] == ".":
-        print("Sorry you missed! No ship was shot")
+        print("Sorry you missed! No ship was hit.")
         grid[row][col] = "M"
     elif grid[row][col] == "O":
         print("You hit!", end=" ")
@@ -344,7 +344,7 @@ def attempt_shot():
             print("Yay! A ship was completely sunk!")
             num_of_ships_sunk += 1
         else:
-            print("Good job! A ship was shot")
+            print("Good job! A ship was hit!")
 
     shots_left -= 1
     
@@ -359,7 +359,7 @@ def check_for_game_over():
     global game_over
 
     if num_of_ships == num_of_ships_sunk:
-        print("Congrats you won the game!")
+        print("Congrats! You won the game!")
         game_over = True
     elif shots_left <= 0:
         print("Sorry, you lost! You ran out of shots, try again next time!")
