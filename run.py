@@ -15,12 +15,15 @@ shots_left = 25
 game_over = False
 num_of_ships_sunk = 0
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+game_over
 ship_positions = [[]]
 grid = [[]]
 
+
 def create_grid_and_check_location(start_row, end_row, start_col, end_col):
     """
-    Checks rows & columns for ship placement and updates the grid and ship locations
+    Checks rows & columns for ship placement and updates the grid
+    and ship locations
     Returns true if ship placement is valid
     """
 
@@ -40,15 +43,16 @@ def create_grid_and_check_location(start_row, end_row, start_col, end_col):
 
     return True
 
+
 def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
     Ensure there's no other ship there and/or not off the grid
     """
+
     global grid_size
 
     delta = 1 if direction in {"right", "down"} else -1
-    
     if direction in {"left", "right"}:
         start_col, end_col = col - length + 1, col + delta
         start_row, end_row = row, row + 1
@@ -57,14 +61,17 @@ def place_ships(row, col, direction, length):
         start_row, end_row = row - length + 1, row + delta
         start_col, end_col = col, col + 1
 
-    return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
-    
+    return (0 <= start_col < grid_size) and \
+        (0 <= start_row < grid_size) and \
+        create_grid_and_check_location(start_row, end_row, start_col, end_col)
+
+
 def create_grid():
-    """ 
+    """
     creates a grid and randomly places ships
     of different sizes in different directions
     """
-    
+
     global grid
     global grid_size
     global num_of_ships
@@ -85,12 +92,22 @@ def create_grid():
     ship_positions = []
 
     while num_of_ships_placed := len(ship_positions) < num_of_ships:
+        random_row, random_col = (random.randint(0, grid_size - 1),
+                              random.randint(0, grid_size - 1))
+        direction = random.choice(["left", "right", "up", "down"])
+        ship_size = random.randint(3, 5)
+        if place_ships(random_row, random_col, direction, ship_size):
+         num_of_ships_placed += 1
+
+    """
+    while num_of_ships_placed := len(ship_positions) < num_of_ships:
         random_row, random_col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
         direction = random.choice(["left", "right", "up", "down"])
         ship_size = random.randint(3, 5)
         if place_ships(random_row, random_col, direction, ship_size):
             num_of_ships_placed += 1
-    
+    """
+
 def print_grid():
     """
     Will print the grid with rows A-J and columns 0-9
@@ -116,11 +133,13 @@ def print_grid():
                 print(cell, end=" ")
         print()
    
+
 def accept_valid_placement():
     """
     Will get data from user (row & column) to place shot
     Writes error to user if input is incorrect
     """
+
     global alphabet
     global grid
     global grid_size
@@ -152,6 +171,7 @@ def accept_valid_placement():
         if grid[row][col] in {".", "O"}:
             return row, col
    
+
 def check_for_ship_sunk(row, col):
     """
     If all parts of a ship have been shot it is sunk and we count how many ships are sunk
@@ -166,12 +186,13 @@ def check_for_ship_sunk(row, col):
     
     return False
    
+
 def attempt_shot():
     """
     Updates grid and ships based on where the shot was located
-    Tells user if their shot missed, hit a ship, and if a ship was completely 
-    sunk
+    Tells user if their shot missed, hit a ship, and if a ship was completely sunk
     """
+
     global grid
     global num_of_ships_sunk
     global shots_left
@@ -194,10 +215,12 @@ def attempt_shot():
 
     shots_left -= 1
     
+
 def check_for_game_over():
     """
     Game over if all ships have been sunk or if the user has run out of shots
     """
+
     global num_of_ships_sunk
     global num_of_ships
     global shots_left
@@ -210,10 +233,12 @@ def check_for_game_over():
         print("Sorry, you lost! You ran out of shots, try again next time!")
         game_over = True
 
+
 def main():
     """
     Main application that runs the game and its functions
     """
+
     global game_over
 
     print()
