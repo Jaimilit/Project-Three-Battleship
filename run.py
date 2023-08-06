@@ -91,13 +91,13 @@ def create_grid():
 
     ship_positions = []
 
-    while num_of_ships_placed := len(ship_positions) < num_of_ships:
-        random_row, random_col = (random.randint(0, grid_size - 1),
-                              random.randint(0, grid_size - 1))
+    while num_of_ships_placed != num_of_ships:
+        random_row = random.randint(0, rows - 1)
+        random_col = random.randint(0, cols - 1)
         direction = random.choice(["left", "right", "up", "down"])
         ship_size = random.randint(3, 5)
         if place_ships(random_row, random_col, direction, ship_size):
-         num_of_ships_placed += 1
+            num_of_ships_placed += 1
 
     """
     while num_of_ships_placed := len(ship_positions) < num_of_ships:
