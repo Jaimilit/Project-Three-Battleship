@@ -162,6 +162,28 @@ def print_grid():
     Will print the grid with rows A-J and columns 0-9
     COME BACK TO THIS ONE TOO
     """
+
+    global grid, alphabet
+
+    debug_mode = True
+
+    alphabet = alphabet[:len(grid) + 1]
+
+    print("   ", end="")
+    for i in range(len(grid[0])):
+        print(f"{i} ", end="")
+    print()
+
+    for row, row_data in enumerate(grid):
+        print(f"{alphabet[row]}) ", end="")
+        for col, cell in enumerate(row_data):
+            if cell == "O":
+                print("O" if debug_mode else ".", end=" ")
+            else:
+                print(cell, end=" ")
+        print()
+
+    """
     #OLD CODE
     global grid
     global alphabet
@@ -186,8 +208,8 @@ def print_grid():
             else:
                 print(grid[row][col], end=" ")
         print("")
-   
     
+    """
 def accept_valid_placement():
     """
     Will get data from user (row & column) to place shot
