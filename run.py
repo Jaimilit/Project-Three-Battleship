@@ -21,7 +21,8 @@ grid = [[]]
 
 def create_grid_and_check_location(start_row, end_row, start_col, end_col):
     """
-    Checks rows & columns for ship placement and updates the grid and ship locations
+    Checks rows & columns for ship placement and updates the grid
+    and ship locations
     Returns true if ship placement is valid
     """
 
@@ -58,8 +59,10 @@ def place_ships(row, col, direction, length):
         start_row, end_row = row - length + 1, row + delta
         start_col, end_col = col, col + 1
 
-    return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
-
+    #return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
+    return ((0 <= start_col < grid_size) and
+        (0 <= start_row < grid_size) and
+        create_grid_and_check_location(start_row, end_row, start_col, end_col))
 
 def create_grid():
     """
