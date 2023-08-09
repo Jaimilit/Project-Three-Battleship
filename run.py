@@ -59,10 +59,11 @@ def place_ships(row, col, direction, length):
         start_row, end_row = row - length + 1, row + delta
         start_col, end_col = col, col + 1
 
-    #return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
+# return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
     return ((0 <= start_col < grid_size) and
         (0 <= start_row < grid_size) and
         create_grid_and_check_location(start_row, end_row, start_col, end_col))
+
 
 def create_grid():
     """
@@ -134,7 +135,9 @@ def accept_valid_placement():
     global grid_size
 
     while True:
-        placement = input("Please enter row A-J and column 0-9. Example C6: ").upper()
+#        placement = input("Please enter row A-J and column 0-9. Example C6: ").upper()
+        placement = input("Please enter row A-J and column 0-9."
+                  "\nExample C6: ").upper()
 
         if len(placement) != 2:
             print("Error: Please enter a valid input such as C6.")
