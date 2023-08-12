@@ -17,6 +17,18 @@ num_of_ships_sunk = 0
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 ship_positions = [[]]
 grid = [[]]
+instructions = (
+    "Welcome to the Battleships game!\n\n"
+    "Instructions:\n"
+    "1. You have 25 shots to take down 5 ships. The ships are of different sizes.\n"
+    "2. Your goal is to sink all the ships on the grid.\n"
+    "3. Enter your shot's row (A-J) and column (0-9) when prompted.\n"
+    "4. '.'represents water, 'X' represents a hit, and 'M' represents a miss.\n"
+    "5. Ships will be placed randomly on the grid at the start of the game.\n"
+    "6. A ship is sunk when all its parts are hit.\n"
+    "7. When all 5 ships are sunk you win the game! \n\n"
+    "LET THE BATTLE BEGIN!"
+)
 
 
 def create_grid_and_check_location(start_row, end_row, start_col, end_col):
@@ -178,9 +190,6 @@ def check_for_ship_sunk(row, col):
     global ship_positions
     global grid
 
-    global ship_positions
-    global grid
-
     for position in ship_positions:
         start_row, end_row, start_col, end_col = position
 
@@ -265,9 +274,12 @@ def main():
     print("\n-----Welcome to Battleships-----\n")
     print()
     print("You have 25 shots to take down 5 ships. The ships are of different sizes. Let the battle begin!")
+    print(instructions)
     print()
 
     create_grid()
+  
+   
 
     while game_over is False:
         print_grid()
