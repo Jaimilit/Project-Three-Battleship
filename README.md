@@ -68,7 +68,7 @@ I have manually tested this project through the following:
 * Tested in my local terminal and Code Institute Heroku terminal
 
 No Linter errors
-![No Linter Errors](assets/
+![No Linter Errors](assets/images/pythonlinter.png)
 
 # BUGS
 
