@@ -67,6 +67,9 @@ I have manually tested this project through the following:
 * Given it invalid inputs in order to ensure correct input accepted only
 * Tested in my local terminal and Code Institute Heroku terminal
 
+No Linter errors
+![No Linter Errors](assets/
+
 # BUGS
 
 ## Solved Bugs
