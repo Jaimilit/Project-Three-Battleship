@@ -20,10 +20,10 @@ grid = [[]]
 instructions = (
     "Welcome to the Battleships game!\n\n"
     "Instructions:\n"
-    "1. You have 25 shots to take down 5 ships. The ships are of different sizes.\n"
+    "1. You have 25 shots to take down 5 ships of different sizes.\n"
     "2. Your goal is to sink all the ships on the grid.\n"
     "3. Enter your shot's row (A-J) and column (0-9) when prompted.\n"
-    "4. '.'represents water, 'X' represents a hit, and 'M' represents a miss.\n"
+    "4. '.'is water, 'X' is a hit, and 'M' is a miss.\n"
     "5. Ships will be placed randomly on the grid at the start of the game.\n"
     "6. A ship is sunk when all its parts are hit.\n"
     "7. When all 5 ships are sunk you win the game! \n\n"
@@ -71,7 +71,6 @@ def place_ships(row, col, direction, length):
         start_row, end_row = row - length + 1, row + delta
         start_col, end_col = col, col + 1
 
-# return (0 <= start_col < grid_size) and (0 <= start_row < grid_size) and create_grid_and_check_location(start_row, end_row, start_col, end_col)
     return ((0 <= start_col < grid_size) and
         (0 <= start_row < grid_size) and
         create_grid_and_check_location(start_row, end_row, start_col, end_col))
@@ -147,9 +146,8 @@ def accept_valid_placement():
     global grid_size
 
     while True:
-#        placement = input("Please enter row A-J and column 0-9. Example C6: ").upper()
         placement = input("Please enter row A-J and column 0-9."
-                  "\nExample C6: ").upper()
+            "\nExample C6: ").upper()
 
         if len(placement) != 2:
             print("Error: Please enter a valid input such as C6.")
@@ -178,14 +176,8 @@ def accept_valid_placement():
 
 def check_for_ship_sunk(row, col):
     """
-    If all parts of a ship have been shot it is sunk and we count how many ships are sunk
-    global ship_positions
-    global grid
-
-    for start_row, end_row, start_col, end_col in ship_positions:
-        if start_row <= row <= end_row and start_col <= col <= end_col:
-            return all(grid[r][c] == "X" for r in range(start_row, end_row) for c in range(start_col, end_col))
-            return False
+    If all parts of a ship have been shot,
+    it is sunk and we count how many ships are sunk
     """
     global ship_positions
     global grid
@@ -200,20 +192,6 @@ def check_for_ship_sunk(row, col):
                         return False
 
     return True
-
-    """
-    for position in ship_positions:
-        start_row = position[0]
-        end_row = position[1]
-        start_col = position[2]
-        end_col = position[3]
-        if start_row <= row <= end_row and start_col <= col <= end_col:
-            for r in range(start_row, end_row):
-                for c in range(start_col, end_col):
-                    if grid[r][c] != "X":
-                        return False
-    return True
-    """
 
 
 def attempt_shot():
@@ -273,13 +251,10 @@ def main():
     print()
     print("\n-----Welcome to Battleships-----\n")
     print()
-    print("You have 25 shots to take down 5 ships. The ships are of different sizes. Let the battle begin!")
     print(instructions)
     print()
 
     create_grid()
-  
-   
 
     while game_over is False:
         print_grid()

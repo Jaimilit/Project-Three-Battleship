@@ -1,6 +1,6 @@
 # Battleship Game
 
-This project is a battleship game to play against a computer. 
+This project is a battleship game where a player plays against a computer. 
 This is a Python terminal game which runs in the Code Institute mock terminal on Heroku.
 The player needs to find all 5 ships and sink the ships before their 25 shots are up.
 
@@ -8,7 +8,7 @@ The player needs to find all 5 ships and sink the ships before their 25 shots ar
 
 This version of the game was created entirely within Python. It is designed to be user-friendly and provides the player with instructions on what they need to do and what input needs to be entered in order to play the game. The goal of the game is to sink 5 ships within 25 shots.
 
-A 10x10 board is created by the computer. It then randomly places ships on the board with ship sizes varying from 0 - 5 spots. In this version I have posted a legend in the instructions. A full stop “.” indicates water or empty space. “O” is part of a ship, “X” indicates a ship that has been hit, and “M” is a shot that lands in water because it has missed a ship. The user wins against the computer if they can hit and sink 5 ships before their 25 shots are used up.
+A 10x10 board is created by the computer. It then randomly places ships on the board with ship sizes varying from 0 - 5 spots. In this version I have posted a legend in the instructions. A full stop “.” indicates water or empty space. “O” is part of a ship, “X” indicates a ship that has been hit, and “M” is a shot that lands in water because it has misses a ship. The user wins against the computer if they can hit and sink 5 ships before their 25 shots are used up.
 
 # Resources
 
@@ -37,11 +37,11 @@ Instructions for the player
 ![Player’s game board](assets/instructions.png)
 The player cannot see where the ships are located. 
 ![The player cannot see where the ships are located (ship locations are “O”)](assets/playerboard.png)
-The user needs to enter input for the ship locations
+The user needs to enter input for the ship locations. Here you can see where the ships(O) have been placed on the board. 
 ![Enter input for location of shots](assets/shiplocations.png)
 Shows that the user cannot enter incorrect data
 ![Input incorrect data so game ensures the user inputs only correct data](assets/incorrectdata.png)
-Shows whether the user hits a ship or misses (X hits, M misses)
+Shows whether the user hits a ship or misses (X hits, M misses, O ship locations)
 ![Hits & misses (X hits, M misses)](assets/hitsandmisses.png)
 Lets the player know if and when they have won the game
 ![Win the game](assets/gamewon.png)
@@ -50,7 +50,7 @@ Lets the player know if and when they have won the game
 
 * Have 2 boards so that the computer can also play against the user
 * Allow user to adjust board size and size of ships
-* Allow user to put the location of their own ships on the board
+* Allow user to place the location of their own ships on the board
 * Improve UX/UI so that the game is more visually interesting for the user
 
 # Data Model
@@ -82,7 +82,7 @@ I have manually tested this project through the following:
 # Lessons
 
 * I changed the name of my project in Github midway through and then had issues pushing my code from codeanywhere back to Github. A lot of trial and errors to fix this issue
-* Because of summer holiday I spent a lot of time on this project, but with big gaps in-between. This made me struggle when * I would go back to the project, I would forget things I changed or that I needed to fix. So in the future, no more big gaps while working on a project
+* Because of summer holiday I spent a lot of time on this project, but with big gaps in-between. This made me struggle when I would go back to the project, I would forget things I changed or that I needed to fix. So in the future, no more big gaps while working on a project
 * Because of the things above, I know that I really need to improve my git comments to have better descriptions and more specific descriptions of what I have done
 * The debugging process was a lot of trial and error, but I believe helped me to learn Python better
 
