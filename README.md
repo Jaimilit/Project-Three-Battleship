@@ -8,7 +8,7 @@ The player needs to find all 5 ships and sink the ships before their 25 shots ar
 
 This version of the game was created entirely within Python. It is designed to be user-friendly and provides the player with instructions on what they need to do and what input needs to be entered in order to play the game. The goal of the game is to sink 5 ships within 25 shots.
 
-A 10x10 board is created by the computer. It then randomly places ships on the board with ship sizes varying from 0 - 5 spots. In this version I have posted a legend in the instructions. A full stop “.” indicates water or empty space. “O” is part of a ship, “X” indicates a ship that has been hit, and “M” is a shot that lands in water because it has misses a ship. The user wins against the computer if they can hit and sink 5 ships before their 25 shots are used up.
+A 10x10 board is created by the computer. It then randomly places ships on the board with ship sizes varying from 0 - 5 spots. In this version I have posted a legend in the instructions. A full stop “.” indicates water or empty space. “O” is part of a ship, “X” indicates a ship that has been hit, and “M” is a shot that lands in water because it misses a ship. The user wins against the computer if they can hit and sink 5 ships before their 25 shots are used up.
 
 # Resources
 
@@ -62,9 +62,8 @@ I created a board class (create grid) as my model. The game creates a board for 
 I have manually tested this project through the following:
 
 * Passed the code through a PEP8 Linter and confirmed that there were no issues
-* I have passed my code through a python check checker
 * I also had friends and family test out my game
-* Given it invalid inputs in order to ensure correct input accepted only
+* Given it invalid inputs in order to ensure correct input is accepted only
 * Tested in my local terminal and Code Institute Heroku terminal
 
 No Linter errors
@@ -76,7 +75,7 @@ No Linter errors
 
 * I originally was having issues with check_for_sunk_ship function.  It wasn’t counting the ships correctly. 
 * I also had issues with checking for  game_over which  wouldn’t count the number of ships correctly, so the game would not end at the appropriate time.
-* Lots of errors of lines being too long when pushed through linter, so I needed to change my code
+* Lots of errors of lines being too long when pushed through linter, so I needed to change my code.
 
 ## Bugs Remaining
 
