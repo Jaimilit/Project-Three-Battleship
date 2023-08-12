@@ -73,7 +73,10 @@ def place_ships(row, col, direction, length):
 
     return ((0 <= start_col < grid_size) and
             (0 <= start_row < grid_size) and
-            create_grid_and_check_location(start_row, end_row, start_col, end_col))
+            create_grid_and_check_location(start_row,
+                                           end_row,
+                                           start_col,
+                                           end_col))
 
 
 def create_grid():
@@ -102,7 +105,8 @@ def create_grid():
     ship_positions = []
 
     while num_of_ships_placed := len(ship_positions) < num_of_ships:
-        random_row, random_col = random.randint(0, grid_size - 1), random.randint(0, grid_size - 1)
+        random_row = random.randint(0, grid_size - 1)
+        random_col = random.randint(0, grid_size - 1)
         direction = random.choice(["left", "right", "up", "down"])
         ship_size = random.randint(3, 5)
         if place_ships(random_row, random_col, direction, ship_size):
