@@ -45,8 +45,8 @@ A  10x10 board is created by the computer. It then randomly places ships on the 
 
 # Resources
 
-This project is based on battleships - read more on Wikipedia - https://en.wikipedia.org/wiki/Battleship_(game)
-Inspiration for my project was taken from Knowledge Maven (https://www.youtube.com/watch?v=tF1WRCrd_HQ) and CS Students https://www.youtube.com/watch?v=MgJBgnsDcF0. Both helped me with ideas for what I wanted my project to look like. 
+This project is based on battleships - read more on [Wikipedia](https://en.wikipedia.org/wiki/Battleship_(game))
+Inspiration for my project was taken from [Knowledge Maven](https://www.youtube.com/watch?v=tF1WRCrd_HQ) and [CS Students](https://www.youtube.com/watch?v=MgJBgnsDcF0) Both helped me with ideas for what I wanted my project to look like. 
 
 # Features
 
@@ -65,8 +65,8 @@ Inspiration for my project was taken from Knowledge Maven (https://www.youtube.c
 
 
 Instructions of the game
-Player’s game board. 
-The player cannot see where the ships are located (ship locations are “O”)
+![Player’s game board](assets/instructions.png)
+![The player cannot see where the ships are located (ship locations are “O”)]
 Enter input for location of shots
 Input incorrect data so game ensures the user inputs only correct data
 Hits & misses (X hits, M misses)
@@ -126,7 +126,7 @@ Steps for deployment:
 
 * Code Institute for the deployment terminal
 * Wikipedia for details of the battleships game
-* Inspiration for the game taken from  CS Students https://www.youtube.com/watch?v=MgJBgnsDcF0 and Knowledge Mavens https://www.youtube.com/watch?v=tF1WRCrd_HQ
+* Inspiration for the game taken from  [CS Students](https://www.youtube.com/watch?v=MgJBgnsDcF0) and [Knowledge Mavens](https://www.youtube.com/watch?v=tF1WRCrd_HQ)
 
 
 
