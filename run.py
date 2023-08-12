@@ -72,8 +72,8 @@ def place_ships(row, col, direction, length):
         start_col, end_col = col, col + 1
 
     return ((0 <= start_col < grid_size) and
-        (0 <= start_row < grid_size) and
-        create_grid_and_check_location(start_row, end_row, start_col, end_col))
+            (0 <= start_row < grid_size) and
+            create_grid_and_check_location(start_row, end_row, start_col, end_col))
 
 
 def create_grid():
@@ -147,7 +147,7 @@ def accept_valid_placement():
 
     while True:
         placement = input("Please enter row A-J and column 0-9."
-            "\nExample C6: ").upper()
+                          "\nExample C6: ").upper()
 
         if len(placement) != 2:
             print("Error: Please enter a valid input such as C6.")
@@ -259,8 +259,8 @@ def main():
     while game_over is False:
         print_grid()
         print()
-        print("Number of ships remaining: " + str(num_of_ships - num_of_ships_sunk))
-        print("Number of shots left: " + str(shots_left))
+        print("Ships remaining: " + str(num_of_ships - num_of_ships_sunk))
+        print("Shots left: " + str(shots_left))
         print()
         attempt_shot()
         print("----------------------------")
