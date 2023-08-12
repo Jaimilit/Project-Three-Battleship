@@ -34,17 +34,17 @@ Inspiration for my project was taken from [Knowledge Maven](https://www.youtube.
 What the game looks like
 
 Instructions for the player
-![Player’s game board](assets/instructions.png)
+![Player’s game board](assets/images/instructions.png)
 The player cannot see where the ships are located. 
-![The player cannot see where the ships are located (ship locations are “O”)](assets/playerboard.png)
+![The player cannot see where the ships are located (ship locations are “O”)](assets/images/playerboard.png)
 The user needs to enter input for the ship locations. Here you can see where the ships(O) have been placed on the board. 
-![Enter input for location of shots](assets/shiplocations.png)
+![Enter input for location of shots](assets/images/shiplocations.png)
 Shows that the user cannot enter incorrect data
-![Input incorrect data so game ensures the user inputs only correct data](assets/incorrectdata.png)
+![Input incorrect data so game ensures the user inputs only correct data](assets/images/incorrectdata.png)
 Shows whether the user hits a ship or misses (X hits, M misses, O ship locations)
-![Hits & misses (X hits, M misses)](assets/hitsandmisses.png)
+![Hits & misses (X hits, M misses)](assets/images/hitsandmisses.png)
 Lets the player know if and when they have won the game
-![Win the game](assets/gamewon.png)
+![Win the game](assets/images/gamewon.png)
 
 ## Future Features
 
