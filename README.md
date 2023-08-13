@@ -8,7 +8,7 @@ The player needs to find all 5 ships and sink the ships before their 25 shots ar
 
 This version of the game was created entirely within Python. It is designed to be user-friendly and provides the player with instructions on what they need to do and what input needs to be entered in order to play the game. The goal of the game is to sink 5 ships within 25 shots.
 
-A 10x10 board is created by the computer. It then randomly places ships on the board with ship sizes varying from 0 - 5 spots. In this version I have posted a legend in the instructions. A full stop “.” indicates water or empty space. “O” is part of a ship, “X” indicates a ship that has been hit, and “M” is a shot that lands in water because it misses a ship. The user wins against the computer if they can hit and sink 5 ships before their 25 shots are used up.
+A 10x10 board is created by the computer. It then randomly places ships on the board with ship sizes varying from 0 - 5 spots. In this version I have written a legend in the instructions. A full stop “.” indicates empty water. “O” is part of a ship, “X” indicates a ship that has been hit, and “M” is a shot that lands in water because it misses a ship. The user wins against the computer if they can hit and sink 5 ships before their 25 shots are used up.
 
 # Resources
 
@@ -43,6 +43,7 @@ Shows that the user cannot enter incorrect data
 ![Input incorrect data so game ensures the user inputs only correct data](assets/images/incorrectdata.png)
 Shows whether the user hits a ship or misses (X hits, M misses, O ship locations)
 ![Hits & misses (X hits, M misses)](assets/images/hitsandmisses.png)
+
 Lets the player know if and when they have won the game
 ![Win the game](assets/images/gamewon.png)
 
