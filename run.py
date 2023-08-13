@@ -1,6 +1,6 @@
 
 # Legend
-#  "." = water or empty space
+#  "." = empy water
 #  "O" = part of ship
 #  "X" = part of ship that was hit by a shot
 #  "M" = a shot that missed and lands in water
@@ -58,8 +58,9 @@ def create_grid_and_check_location(start_row, end_row, start_col, end_col):
 def place_ships(row, col, direction, length):
     """
     Place ships on grid - random method
-    Ensure there's no other ship there and/or not off the grid
+    Ensures there's no other ship there and/or not off the grid
     """
+
     global grid_size
 
     delta = 1 if direction in {"right", "down"} else -1
@@ -141,8 +142,8 @@ def print_grid():
 
 def accept_valid_placement():
     """
-    Will get data from user (row & column) to place shot
-    Writes error to user if input is incorrect
+    will get data from user (row & column) to place shot on grid
+    writes error to user if input is incorrect
     """
 
     global alphabet
@@ -180,7 +181,7 @@ def accept_valid_placement():
 
 def check_for_ship_sunk(row, col):
     """
-    If all parts of a ship have been shot,
+    if all parts of a ship have been shot,
     it is sunk and we count how many ships are sunk
     """
     global ship_positions
@@ -200,8 +201,8 @@ def check_for_ship_sunk(row, col):
 
 def attempt_shot():
     """
-    Updates grid and ships based on where the shot was located
-    Tells user if their shot missed, hit a ship, and if a ship was completely
+    updates grid and ships based on where the shot was located
+    tells user if their shot missed, hit a ship, and if a ship was completely
     sunk
     """
 
@@ -230,7 +231,7 @@ def attempt_shot():
 
 def check_for_game_over():
     """
-    Game over if all ships have been sunk or if the user has run out of shots
+    game over if all ships have been sunk or if the user has run out of shots
     """
 
     global num_of_ships_sunk
@@ -248,7 +249,7 @@ def check_for_game_over():
 
 def main():
     """
-    Main application that runs the game and its functions
+    main application that runs the game and its functions
     """
     global game_over
 
