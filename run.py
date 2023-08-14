@@ -74,14 +74,29 @@ def place_computer_ships():
             direction = random.choice(["left", "right", "up", "down"])
             ship_size = random.randint(3, 5)
             if place_ships(random_row, random_col, direction, ship_size, computer_grid):
+                ship_positions_to_mark = []
+                for i in range(ship_size):
+                    if direction == "left":
+                        ship_positions_to_mark.append((random_row, random_col - i))
+                    elif direction == "right":
+                        ship_positions_to_mark.append((random_row, random_col + i))
+                    elif direction == "up":
+                        ship_positions_to_mark.append((random_row - i, random_col))
+                    else:
+                        ship_positions_to_mark.append((random_row + i, random_col))
                 computer_ship_positions.append((random_row, random_col, direction, ship_size))
+                
+                # Mark ship positions on computer_grid
+                for position in ship_positions_to_mark:
+                    row, col = position
+                    computer_grid[row][col] = "O"
                 break
 
 def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship_positions):
     global grid_size, alphabet
     debug_mode = True
     alphabet = alphabet[:len(player_grid) + 1]
-    
+
     print("   ", end="")
     for i in range(len(player_grid[0])):
         print(f"{i} ", end="")
@@ -89,7 +104,7 @@ def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship
     for i in range(len(computer_grid[0])):
         print(f"{i} ", end="")
     print()
-    
+
     for row, (player_row, computer_row) in enumerate(zip(player_grid, computer_grid)):
         print(f"{alphabet[row]}) ", end="")
         for cell in player_row:
@@ -104,23 +119,15 @@ def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship
 
     print("\nPlayer's Ship Positions:")
     for position in player_ship_positions:
-        row, col, direction, size = position
-        if direction == "right":
-            for i in range(size):
-                player_grid[row][col + i] = "O"
-        elif direction == "down":
-            for i in range(size):
-                player_grid[row + i][col] = "O"
+        print(position)
 
     print("\nComputer's Ship Positions:")
     for position in computer_ship_positions:
-        row, col, direction, size = position
-        if direction == "right":
-            for i in range(size):
-                computer_grid[row][col + i] = "O"
-        elif direction == "down":
-            for i in range(size):
-                computer_grid[row + i][col] = "O"
+        print(position)
+
+
+
+
 def accept_valid_placement():
     """
     will get data from user (row & column) to place shot on grid
@@ -164,8 +171,8 @@ def computer_turn():
     print("\nComputer's Turn:")
     time.sleep(1)
     while True:
-        row = random.randint(0, grid_size - 1)
-        col = random.randint(0, grid_size - 1)
+        row = random.randint(0, computer_grid_size - 1)
+        col = random.randint(0, computer_grid_size - 1)
         if computer_grid[row][col] in {"M", "X"}:
             continue
         if computer_grid[row][col] in {".", "O"}:
@@ -176,7 +183,7 @@ def computer_turn():
         computer_grid[row][col] = "M"
     elif computer_grid[row][col] == "O":
         print("Computer hit!")
-        computer_grid[row][col] = "X"
+        computer_grid[row][col] = "X"  # Update the computer grid to display the hit
     shots_left_computer -= 1
     time.sleep(1)
 
