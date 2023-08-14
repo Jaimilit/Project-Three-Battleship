@@ -21,7 +21,7 @@ instructions = (
     "1. You have 25 shots to take down 5 ships of different sizes.\n"
     "2. Your goal is to sink all the ships on the grid.\n"
     "3. Enter your shot's row (A-J) and column (0-9) when prompted.\n"
-    "4. '.'is water, 'X' is a hit, and 'M' is a miss.\n"
+    "4. '.' is water, 'X' is a hit, and 'M' is a miss.\n"
     "5. Ships will be placed randomly on the grid at the start of the game.\n"
     "6. A ship is sunk when all its parts are hit.\n"
     "7. When all 5 ships are sunk you win the game! \n\n"
@@ -84,13 +84,15 @@ def place_computer_ships():
                         ship_positions_to_mark.append((random_row - i, random_col))
                     else:
                         ship_positions_to_mark.append((random_row + i, random_col))
-                computer_ship_positions.append((random_row, random_col, direction, ship_size))
                 
-                # Mark ship positions on computer_grid
-                for position in ship_positions_to_mark:
-                    row, col = position
-                    computer_grid[row][col] = "O"
-                break
+                if all(0 <= row < computer_grid_size and 0 <= col < computer_grid_size for row, col in ship_positions_to_mark):
+                    computer_ship_positions.append((random_row, random_col, direction, ship_size))
+
+                    # Mark ship positions on computer_grid
+                    for position in ship_positions_to_mark:
+                        row, col = position
+                        computer_grid[row][col] = "O"
+                    break
 
 def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship_positions):
     global grid_size, alphabet
@@ -116,17 +118,6 @@ def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship
         for cell in computer_row:
             print(cell, end=" ")
         print()
-
-    print("\nPlayer's Ship Positions:")
-    for position in player_ship_positions:
-        print(position)
-
-    print("\nComputer's Ship Positions:")
-    for position in computer_ship_positions:
-        print(position)
-
-
-
 
 def accept_valid_placement():
     """
@@ -165,6 +156,28 @@ def accept_valid_placement():
 
         if grid[row][col] in {".", "O"}:
             return row, col
+
+def check_for_ship_sunk(row, col):
+    """
+    Checks if a ship at the given position is completely sunk.
+    """
+    global computer_ship_positions
+
+    for ship_position in computer_ship_positions:
+        ship_row, ship_col, ship_direction, ship_size = ship_position
+        if ship_direction == "left":
+            if (ship_row == row and ship_col - ship_size + 1 <= col <= ship_col):
+                return False
+        elif ship_direction == "right":
+            if (ship_row == row and ship_col <= col <= ship_col + ship_size - 1):
+                return False
+        elif ship_direction == "up":
+            if (ship_col == col and ship_row - ship_size + 1 <= row <= ship_row):
+                return False
+        elif ship_direction == "down":
+            if (ship_col == col and ship_row <= row <= ship_row + ship_size - 1):
+                return False
+    return True
 
 def computer_turn():
     global computer_grid, shots_left_computer
