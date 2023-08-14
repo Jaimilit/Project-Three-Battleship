@@ -44,12 +44,22 @@ def place_ships(row, col, direction, length, grid_to_place):
         start_row, end_row = row - length + 1, row + delta
         start_col, end_col = col, col + 1
 
-    return ((0 <= start_col < grid_size) and
-            (0 <= start_row < grid_size) and
-            create_grid_and_check_location(start_row,
-                                           end_row,
-                                           start_col,
-                                           end_col, grid_to_place))
+    if create_grid_and_check_location(start_row, end_row, start_col, end_col, grid_to_place):
+        ship_positions_to_mark = []
+        for i in range(length):
+            if direction == "left":
+                ship_positions_to_mark.append((row, col - i))
+            elif direction == "right":
+                ship_positions_to_mark.append((row, col + i))
+            elif direction == "up":
+                ship_positions_to_mark.append((row - i, col))
+            else:
+                ship_positions_to_mark.append((row + i, col))
+        
+        if all(0 <= r < grid_size and 0 <= c < grid_size for r, c in ship_positions_to_mark):
+            ship_positions.extend(ship_positions_to_mark)
+            return True
+    return False
 
 def create_grid(size):
     rows, cols = (size, size)
@@ -109,15 +119,16 @@ def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship
 
     for row, (player_row, computer_row) in enumerate(zip(player_grid, computer_grid)):
         print(f"{alphabet[row]}) ", end="")
-        for cell in player_row:
-            if cell == "O":
-                print("O" if debug_mode else ".", end=" ")
+        for col, cell in enumerate(player_row):
+            if (row, col) in player_ship_positions:
+                print("O", end=" ")
             else:
                 print(cell, end=" ")
         print("    ", end="")
         for cell in computer_row:
             print(cell, end=" ")
         print()
+
 
 def accept_valid_placement():
     """
