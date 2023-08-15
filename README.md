@@ -70,6 +70,16 @@ I have manually tested this project through the following:
 No Linter errors
 ![No Linter Errors](assets/images/pythonlinter.png)
 
+# Languages
+Python was used for this program
+
+# Frameworks, Libraries & Programs Used
+GitHub - to store repository
+Codeanywhere - to write the program
+GitPod - to finish writing my program when I had issues with Codeanywhere
+GitHub - to store my repository for submission
+Heroku - to deploy the live version of the terminal
+
 # BUGS
 
 ## Solved Bugs
