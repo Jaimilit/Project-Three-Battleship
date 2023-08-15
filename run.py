@@ -98,7 +98,7 @@ def place_computer_ships():
                         row, col = position
                         computer_grid[row][col] = "O"
                     break
-
+"""
 def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship_positions):
     global grid_size, alphabet
     debug_mode = True
@@ -123,7 +123,7 @@ def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship
         for cell in computer_row:
             print(cell, end=" ")
         print()
-
+"""
 
 def accept_valid_placement():
     """
