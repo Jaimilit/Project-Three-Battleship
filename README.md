@@ -93,11 +93,25 @@ No Linter errors
 
 This project was deployed using Code Institute's mock terminal for Heroku.
 Steps for deployment:
-* Fork or clone the repository
+* Log in to Heroku
 * Create a new Heroku app
-* Set the buildbacks to Python and NodeJS in that order
-* Link the Heroku app to the repository
-* Click on deploy
+* Navigate to setting
+* Add the following KEY/Value pairs:
+    * PORT + 8000
+* Add 2 buildbacks - Python and NodeJS in that order
+* Go to the Gitpod terminal
+** Type the following commands to the terminal
+*** Heroku login -i
+*** Enter in username + password
+*** Heroku apps
+*** heroku git:remote -a my-app-name
+*** git add .
+*** git commit -m "Deploy to Heroku cia CLI"
+*** git push origin main
+*** git push heroku main
+***
+* Link can be found here: 
+* Site is deployed: ![Battleship Game](https://project-three-battleship-42bd9eb292ca.herokuapp.com/)
 
 # Credits
 
