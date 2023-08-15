@@ -3,18 +3,13 @@ import time
 
 # Variables
 grid_size = 10
-computer_grid_size = 10
 num_of_ships = 5
 shots_left = 25
 game_over = False
 num_of_ships_sunk = 0
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 ship_positions = []
-computer_ship_positions = []
 grid = []
-computer_grid = []
-shots_left_player = 25
-shots_left_computer = 25
 instructions = (
     "Welcome to the Battleships game!\n\n"
     "Instructions:\n"
