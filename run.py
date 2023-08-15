@@ -184,7 +184,7 @@ def check_for_ship_sunk(row, col):
             if (ship_col == col and ship_row <= row <= ship_row + ship_size - 1):
                 return False
     return True
-
+    """
 def computer_turn():
     global computer_grid, shots_left_computer
     print("\nComputer's Turn:")
@@ -205,7 +205,7 @@ def computer_turn():
         computer_grid[row][col] = "X"  # Update the computer grid to display the hit
     shots_left_computer -= 1
     time.sleep(1)
-
+    """
 def attempt_shot():
     """
     updates grid and ships based on where the shot was located
