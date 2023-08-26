@@ -149,6 +149,102 @@ class Board:
             x, y = coord
             self.grid[x][y] = 'O'  
 
+     def random_place_ship(self):
+        """
+        Randomly choose a ship type, create it, and place it on the board without collisions or
+        going outside the board
+        max_attempts to avoid infinite loops in tight scenarios
+         Once the ship has been placed successfully, exit the method
+         Choose orientation again for each attempt
+        """
+
+        ship_name, ship_size = random.choice(list(Ship.SHIP_TYPES.items()))
+        ship = Ship(ship_name, ship_size, self)
+
+        attempts = 0
+        max_attempts = 1000  
+
+        orientation = random.choice(["horizontal", "vertical"])
+
+        while attempts < max_attempts:
+            if orientation == "horizontal":
+                x = random.randint(0, self.size - 1)
+                y = random.randint(0, self.size - ship_size)
+            else:  # vertical
+                x = random.randint(0, self.size - ship_size)
+                y = random.randint(0, self.size - 1)
+
+            try:
+                self.place_ship(ship, (x, y), orientation)
+                return  
+            except ValueError:
+                attempts += 1
+                orientation = random.choice(["horizontal", "vertical"])  
+
+        raise RuntimeError("Unable to randomly place the ship after many attempts.")
+
+    def check_hit(self, coordinate):
+        """
+        Check if a shot hits a ship on the board
+        Mark hit on board with 'X'
+        Mark miss on board with 'M'
+        """
+        x, y = coordinate
+        for ship in self.ships:
+            if ship.is_hit(coordinate):
+                self.grid[x][y] = 'X'  
+                if ship.is_sunk():
+                    print("Yay! A ship was completely sunk!")
+                return True
+        else:
+            if self.check_valid(coordinate):
+                self.grid[x][y] = 'M'  
+                    print("Sorry you missed! No ship was hit.")
+            return False
+    
+    def check_valid(self, coordinate):
+        """
+        Checks coorindate is valid placement
+        """
+        x, y = coordinate
+        if not (0 <= x < self.size and 0 <= y < self.size):
+            return False
+        if not (self.grid[x][y] == "." or self.grid[x][y] == "O"):
+            return False
+        return True
+    
+     def all_ships_sunk(self):
+        """
+        Check if all ships on the board are sunk
+        """
+        return all(ship.is_sunk() for ship in self.ships)
+
+    def display(self):
+        """
+        Displays the board to the console
+        Print rows with A-J labels
+        Use ASCII method
+        """
+        print('   ' + ' '.join([str(i) for i in range(self.size)]))
+
+        for i in range(self.size):
+            row_label = chr(i + 65)  
+            print(f"{row_label}) {' '.join(self.grid[i])}")
+    
+     @staticmethod
+    def print_boards(board1, board2, board1_name="Player 1", board2_name="Player 2"):
+        """
+        Static method to print two boards side-by-side 
+        Board 1 is for player 1
+        Board 2 is for player 2
+        """
+        print(f"{board1_name: <15}{'': <10}{board2_name: <15}")
+        print("   " + " ".join(map(str, range(board1.size))) + "        " + " ".join(map(str, range(board2.size))))
+
+        for i in range(board1.size):
+            row_letter = chr(65 + i)  
+            print(f"{row_letter}) {' '.join(board1.grid[i])}     {row_letter}) {' '.join(board2.grid[i])}")
+
 
 
 """
