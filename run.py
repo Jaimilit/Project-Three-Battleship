@@ -9,6 +9,7 @@ import time
 
 # Variables
 instructions = (
+    
     "Welcome to the Battleships game!\n\n"
     "Instructions:\n"
     "1. You have 25 shots to take down 5 ships of different sizes.\n"
@@ -19,6 +20,7 @@ instructions = (
     "6. A ship is sunk when all its parts are hit.\n"
     "7. When all 5 ships are sunk you win the game! \n\n"
     "LET THE BATTLE BEGIN!"
+
 )
 
 
