@@ -1,15 +1,15 @@
 # Battleship Game
 
-This project is a battleship game where a player plays against a computer. 
+This project is a battleship game where a player plays against a computer and the computer plays back against the player.
 This is a Python terminal game which runs in the Code Institute mock terminal on Heroku.
 There are 2 players in the game - the user and the computer which each have their own board.
-The player needs to find all 5 ships and sink the ships before their 25 shots are up or the computer finds their ships
+The player needs to find all 5 ships and sink the ships before their 25 shots are up or the computer finds and sinks all their ships.
 
 # Instructions - How to Play
 
 This version of the game was created entirely within Python. It is designed to be user-friendly and provides the player with instructions on what they need to do and what input needs to be entered in order to play the game. The goal of the game is to sink 5 ships within 25 shots.
 
-A 10x10 board is created by the computer. It then randomly places ships on the board with ship sizes varying from 0 - 5 spots depending on the type of ship it is - carrier, battleship, cruiser, submarine, or destroyer. In this version I have written a legend in the instructions. A full stop “.” indicates empty water. “O” is part of a ship, “X” indicates a ship that has been hit, and “M” is a shot that lands in water because it misses a ship. The user wins against the computer if they can hit and sink 5 ships before their 25 shots are used up or the computer finds and sinks all their ships.
+A 10x10 board is created by the computer. It then randomly places ships on the board with ship sizes varying from 0 - 5 spots depending on the type of ship it is - carrier, battleship, cruiser, submarine, or destroyer. In this version I have written a legend in the instructions. A full stop “.” indicates empty water, “O” is part of a ship, “X” indicates a ship that has been hit, and “M” is a shot that lands in water because it misses a ship. The user wins against the computer if they can hit and sink 5 ships before their 25 shots are used up or the computer finds and sinks all their ships.
 
 # Resources
 
@@ -34,7 +34,7 @@ Inspiration for my project was taken from [Knowledge Maven](https://www.youtube.
 
 What the game looks like
 
-Instructions for the player
+Instructions for the player and the initial boards are seen. On the left is the user's board which the computer will play against and you can see where the game randomly placed ships on the board. The board on the right is where the user will play and make their guesses.
 ![Player’s game board](assets/images/instructions.png)
 The player cannot see where the ships are located. 
 Shows that the user cannot enter incorrect data
@@ -54,7 +54,7 @@ Lets the player know if and when they have won the game
 
 # Data Model
 
-I created classes as my model for this game - ship, board, player, & game. The game creates a board for the player to play against the computer. You can always see two boards - the one you are playing on (computer board) and your board which is the computer is playing against.
+I created classes as my model for this game - ship, board, player, & game. The game creates two boards - one for the player/user and the second one for the computer to play.
  It stores the range of the grid 10x10, 5 ships of varying sizes, and the player’s guesses based on 25 shots. 
 
 # Testing
@@ -92,8 +92,8 @@ Heroku - to deploy the live version of the terminal
 
 # Lessons
 
-* I originally created this project as a single user against the computer. The computer didn't have it's own board and/or turn. So I did that, but then I wanted to challenege myself to add the computer as a player as well. However, when I tried to add the computer as another player I couldn't get it to work. I tried for what felt like forever, but that didn't work. A friend suggested just starting over again and having a good outline in the beginning of what I wanted to create. He also suggested creating my project using classes for the objects such as board and player. So I started all over again, with having a better outline of what I wanted my project to look like. So it worked much better when I started from stratch, instead of incorporating a second player into what I initally created.
-* I changed the name of my project in Github midway through and then had issues pushing my code from codeanywhere back to Github. A lot of trial and errors to fix this issue
+* I originally created this project as a single user against the computer. The computer didn't have it's own board and/or turn. So I was able to create a basic game with just the player against a computer board. But then I wanted to challenege myself to add the computer as a player as well. However, when I tried to add the computer as another player I couldn't get it to work. I tried for what felt like forever, but nothing seemed to work. A friend suggested just starting over  and having a good outline in the beginning of what I wanted to create. He also suggested creating my project using classes for the objects such as board and player. So I started all over again, with having a better outline of what I wanted my project to look like. So it worked much better when I started from stratch, instead of incorporating a second player into what I initally created.
+* I changed the name of my project in Github midway through and then had issues pushing my code from codeanywhere back to Github. A lot of trial and errors to fix this issue. After talking with a tutor, I used Gitpod instead.
 * Because of summer holiday I spent a lot of time on this project, but with big gaps in-between. This made me struggle when I would go back to the project, I would forget things I changed or that I needed to fix. So in the future, no more big gaps while working on a project
 * Because of the things above, I know that I really need to improve my git comments to have better descriptions and more specific descriptions of what I have done
 * The debugging process was a lot of trial and error, but I believe helped me to learn Python better
