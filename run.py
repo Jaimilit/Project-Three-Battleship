@@ -130,32 +130,32 @@ class Board:
         x, y = start_coordinate
 
         if x < 0 or x >= self.size or y < 0 or y >= self.size:
-            raise ValueError(f"Coordinates {start_coordinate} are out of the board's range.")
+            raise ValueError(f"Coordinates {start_coordinate} out of range.")
 
         if orientation == "horizontal":
             if x + ship.size > self.size:
                 raise ValueError(
-                    f"Ship cannot be placed at {start_coordinate} in {orientation} orientation. "
+                    f"Can't be placed at {start_coordinate} in {orientation}."
                     f"It will go out of the board.")
         elif orientation == "vertical":
             if y + ship.size > self.size:
                 raise ValueError(
-                    f"Ship cannot be placed at {start_coordinate} in {orientation} orientation. "
+                    f"Can't be placed at {start_coordinate} in {orientation}."
                     f"It will go out of the board.")
         else:
-            raise ValueError("Invalid orientation. It should be either 'horizontal' or 'vertical'.")
+            raise ValueError("Invalid. Needs - 'horizontal' or 'vertical'.")
 
         ship.place(start_coordinate, orientation)
         self.ships.append(ship)
 
         for coord in ship.position:
             x, y = coord
-            self.grid[x][y] = 'O'  
+            self.grid[x][y] = 'O'
 
     def random_place_ship(self):
         """
-        Randomly chooses a ship type, creates it, and places it on the board without collisions or
-        going outside the board
+        Randomly chooses a ship type, creates it, and places it on the
+        board without collisions or going outside the board
         Uses max attempts to avoid infinite loops in tight scenarios
         Once the ship has been placed successfully, exit the method
         Choose orientation again for each attempt
@@ -164,7 +164,7 @@ class Board:
         ship = Ship(ship_name, ship_size, self)
 
         attempts = 0
-        max_attempts = 1000  
+        max_attempts = 1000
 
         orientation = random.choice(["horizontal", "vertical"])
 
@@ -178,12 +178,12 @@ class Board:
 
             try:
                 self.place_ship(ship, (x, y), orientation)
-                return  
+                return
             except ValueError:
                 attempts += 1
-                orientation = random.choice(["horizontal", "vertical"])  
+                orientation = random.choice(["horizontal", "vertical"])
 
-        raise RuntimeError("Unable to randomly place the ship after many attempts.")
+        raise RuntimeError("Too many attempts.")
 
     def check_hit(self, coordinate):
         """
@@ -194,16 +194,15 @@ class Board:
         x, y = coordinate
         for ship in self.ships:
             if ship.is_hit(coordinate):
-                self.grid[x][y] = 'X'  
+                self.grid[x][y] = 'X'
                 if ship.is_sunk():
                     print("Yay! A ship was completely sunk!")
                 return True
         else:
             if self.check_valid(coordinate):
-                self.grid[x][y] = 'M'  
-                #print("Sorry you missed! No ship was hit.")
+                self.grid[x][y] = 'M'
             return False
-    
+
     def check_valid(self, coordinate):
         """
         Checks coorindate is valid placement
@@ -214,7 +213,7 @@ class Board:
         if not (self.grid[x][y] == "." or self.grid[x][y] == "O"):
             return False
         return True
-    
+
     def all_ships_sunk(self):
         """
         Checks if all ships on the board are sunk by iterating through
@@ -231,13 +230,13 @@ class Board:
         print('   ' + ' '.join([str(i) for i in range(self.size)]))
 
         for i in range(self.size):
-            row_label = chr(i + 65)  
+            row_label = chr(i + 65)
             print(f"{row_label}) {' '.join(self.grid[i])}")
-    
+
     @staticmethod
     def print_boards(board1, board2, board1_name="Player 1", board2_name="Player 2"):
         """
-        Static method to print two boards side-by-side 
+        Static method to print two boards side-by-side
         Board 1 is for player 1
         Board 2 is for player 2
         """
@@ -245,24 +244,25 @@ class Board:
         print("   " + " ".join(map(str, range(board1.size))) + "        " + " ".join(map(str, range(board2.size))))
 
         for i in range(board1.size):
-            row_letter = chr(65 + i)  
+            row_letter = chr(65 + i)
             print(f"{row_letter}) {' '.join(board1.grid[i])}     {row_letter}) {' '.join(board2.grid[i])}")
 
 
 class Player:
     def __init__(self, name, board_size=10, opponent=None, is_computer=False):
-        """ 
-        Use init method to store attributes that will later be changed for player
+        """
+        Use init method to store attributes that will later be changed for
+        player
         Own board is where the player places ships
         The Guess board to keep track of shots taken
         """
         self.name = name
-        self.own_board = Board(board_size)  
-        self.guess_board = Board(board_size)  
+        self.own_board = Board(board_size)
+        self.guess_board = Board(board_size)
         self.is_computer = is_computer
         self.opponent = opponent
         self.number_of_plays = 0
-    
+
     def place_ship(self, ship_name, start_coordinate, orientation):
         """
         Allows player to place a ship on their own game board
@@ -270,16 +270,21 @@ class Player:
         ship_size = Ship.SHIP_TYPES[ship_name]
         new_ship = Ship(ship_name, ship_size, self.own_board)
         self.own_board.place_ship(new_ship, start_coordinate, orientation)
-    
+
     def take_turn(self):
         """
         Represents a player's turn in the game
-        Allows a player to choose a coordinate to shoot at opponent's/computer's board
-        If the player is the computer, it chooses a random valid coordinate
-        If the player is human, it prompts the user to enter a coordinate until a valid one is provided
-        It checks if the chosen coordinate is a valid move (not already played and within the board)
-        If the move is valid, it takes a shot at the chosen coordinate on the opponent's board
-        Finally, it increments the number of plays.
+        Allows a player to choose a coordinate to shoot at
+        opponent's/computer's board
+        If the player is the computer, it chooses a random
+        valid coordinate
+        If the player is human, it prompts the user to enter a
+        coordinate until a valid one is provided
+        It checks if the chosen coordinate is a valid move
+        (not already played and within the board)
+        If the move is valid, it takes a shot at the chosen
+        coordinate on the opponent's board
+        Finally, it increments the number of plays
         """
         valid_play = False
         x, y = -1, -1
@@ -298,7 +303,7 @@ class Player:
 
             valid_play = self.opponent.own_board.check_valid((x, y))
             if not valid_play:
-                print("That coordinate is already played or outside of the board")
+                print("That coordinate has been played or outside of grid")
         result = self.take_shot((x, y), self.opponent)
         print(result)  # Print the result here
         self.number_of_plays += 1
@@ -337,6 +342,7 @@ class Player:
 
         return row, col
 
+
 class Game:
     def __init__(self, player1, player2):
         """
@@ -346,11 +352,12 @@ class Game:
         self.player2 = player2
         self.player1.opponent = self.player2
         self.player2.opponent = self.player1
-    
+
     def check_win(self):
         """
         Checks if the given player has sunk all opponent's ships
-        and can win the game or if player has reached maximum number of plays/shots
+        and can win the game or if player has reached maximum
+        number of plays/shots
         """
         if self.player1.own_board.all_ships_sunk():
             print(f"{self.player2.name} won!")
@@ -361,7 +368,7 @@ class Game:
         if self.player1.number_of_plays >= 25 or self.player2.number_of_plays >= 25:
             print(f"Game over... Your 25 shots are up!")
             return True
-    
+
     def place_ships_randomly(self, amount):
         """
         Places a specified number of ships randomly on both players' boards
@@ -369,7 +376,7 @@ class Game:
         for i in range(amount):
             self.player1.own_board.random_place_ship()
             self.player2.own_board.random_place_ship()
-    
+
     def take_turn(self, current_player):
         """
         Player and computer take turns
@@ -383,7 +390,7 @@ class Game:
         if self.check_win():
             return True
         return False
-    
+
     def play(self):
         """
         Plays the game
@@ -395,7 +402,7 @@ class Game:
             Board.print_boards(self.player1.own_board, self.player1.guess_board, "User's board", "Computer's board")
             if self.take_turn(self.player1):
                 break
-            
+
             Board.print_boards(self.player1.own_board, self.player1.guess_board, "User's board", "Computer's board")
             time.sleep(2)
             if self.take_turn(self.player2):
@@ -419,3 +426,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
