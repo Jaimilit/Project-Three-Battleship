@@ -23,6 +23,46 @@ instructions = (
     "LET THE BATTLE BEGIN!"
 )
 
+class Ship:
+
+    SHIP_TYPES = {
+        "Carrier": 5,
+        "Battleship": 4,
+        "Cruiser": 3,
+        "Submarine": 3,
+        "Destroyer": 2
+    }
+
+ def __init__(self, ship_type, size, board):
+        self.ship_type = ship_type
+        self.size = size
+        self.position = []  
+        self.hit_coordinates = set()  
+        self.board = board  
+
+def place(self, start_coordinate, orientation):
+        """
+        Place the ship on the board with a given starting coordinate and orientation.
+        """
+        x, y = start_coordinate
+        temp_positions = []
+
+        if orientation == "horizontal":
+            for i in range(self.size):
+                temp_positions.append((x + i, y))
+        elif orientation == "vertical":
+            for i in range(self.size):
+                temp_positions.append((x, y + i))
+        else:
+            raise ValueError("Invalid orientation. It should be either 'horizontal' or 'vertical'.")
+
+        for coord in temp_positions:
+            if coord in self.board.ships_positions():  # Assuming the Board has a ships_positions method
+                raise ValueError(f"A ship is already placed at coordinate {coord}")
+
+        self.position = temp_positions
+
+
 def create_grid_and_check_location(start_row, end_row, start_col, end_col, grid_to_check):
     for r in range(start_row, end_row):
         for c in range(start_col, end_col):
