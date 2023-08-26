@@ -21,6 +21,7 @@ instructions = (
     "LET THE BATTLE BEGIN!"
 )
 
+
 class Ship:
     """
     Use class method for items such a ship
@@ -35,65 +36,71 @@ class Ship:
     }
 
     def __init__(self, ship_type, size, board):
-        """ 
+        """
         Initialize a Ship object with its attributes
-
         """
         self.ship_type = ship_type
         self.size = size
-        self.position = []  
-        self.hit_coordinates = set()  
-        self.board = board  
+        self.position = []
+        self.hit_coordinates = set()
+        self.board = board
 
     def place(self, start_coordinate, orientation):
-            """
-            Place the ship on the board with a given starting coordinate and orientation
-            It performs checks to ensure that the placement is valid and raises errors 
-            if the placement would conflict with existing ship positions or if an invalid orientation is provided
-            """
-            x, y = start_coordinate
-            temp_positions = []
+        """
+        Place the ship on the board with a given starting coordinate
+        and orientation
+        It performs checks to ensure that the placement is valid and
+        raises errors
+        if the placement would conflict with existing ship positions
+        or if an invalid orientation is provided
+        """
+        x, y = start_coordinate
+        temp_positions = []
 
-            if orientation == "horizontal":
-                for i in range(self.size):
-                    temp_positions.append((x + i, y))
-            elif orientation == "vertical":
-                for i in range(self.size):
-                    temp_positions.append((x, y + i))
-            else:
-                raise ValueError("Invalid orientation. It should be either 'horizontal' or 'vertical'.")
+        if orientation == "horizontal":
+            for i in range(self.size):
+                temp_positions.append((x + i, y))
+        elif orientation == "vertical":
+            for i in range(self.size):
+                temp_positions.append((x, y + i))
+        else:
+            raise ValueError("Invalid. Either horizontal or vertical.")
 
-            for coord in temp_positions:
-                if coord in self.board.ships_positions():  
-                    raise ValueError(f"A ship is already placed at coordinate {coord}")
+        for coord in temp_positions:
+            if coord in self.board.ships_positions():
+                raise ValueError(f"A ship is already placed here {coord}")
 
-            self.position = temp_positions
+        self.position = temp_positions
 
     def is_hit(self, coordinate):
         """
         Checks if a shot hits a ship. If so, mark it and return True.
         """
-        if coordinate in self.position and coordinate not in self.hit_coordinates:
+        is_in_position = coordinate in self.position
+        if is_in_position and coordinate not in self.hit_coordinates:
             self.hit_coordinates.add(coordinate)
             return True
         return False
 
     def is_sunk(self):
-            """
-            Checks whether a ship is sunk by comparing the number of hit coordinates to the size of the ship
-            If all coordinates have been hit, the function returns True; otherwise, it returns False
-            """
-            return len(self.hit_coordinates) == self.size
+        """
+        Checks whether a ship is sunk by comparing the number of hit
+        coordinates to the size of the ship
+        If all coordinates have been hit, the function returns True;
+        otherwise, it returns False
+        """
+        return len(self.hit_coordinates) == self.size
+
 
 class Board:
     """
     Use class for board, board size 10x10 as default
     """
-    def __init__(self, size=10): 
+    def __init__(self, size=10):
         self.size = size
         self.grid = [['.' for _ in range(size)] for _ in range(size)]
         self.ships = []
-    
+
     def ships_positions(self):
         """
         Return a list of all ship coordinates on the board
@@ -102,7 +109,7 @@ class Board:
         for ship in self.ships:
             positions.extend(ship.position)
         return positions
-    
+
     def get_ship_at_coordinate(self, coordinate):
         """
         Return the ship at the given coordinate or None if there's no ship
@@ -112,11 +119,12 @@ class Board:
             if (x, y) in ship.position:
                 return ship
         return None
-    
+
     def place_ship(self, ship, start_coordinate, orientation):
         """
         Attempt to place a ship on the board
-        Ensures coorindates are not out of range of the board for vertical & horizational
+        Ensures coorindates are not out of range of the board for
+        vertical & horizational
         Places ships as an O on the board
         """
         x, y = start_coordinate
@@ -152,7 +160,6 @@ class Board:
         Once the ship has been placed successfully, exit the method
         Choose orientation again for each attempt
         """
-
         ship_name, ship_size = random.choice(list(Ship.SHIP_TYPES.items()))
         ship = Ship(ship_name, ship_size, self)
 
@@ -240,6 +247,7 @@ class Board:
         for i in range(board1.size):
             row_letter = chr(65 + i)  
             print(f"{row_letter}) {' '.join(board1.grid[i])}     {row_letter}) {' '.join(board2.grid[i])}")
+
 
 class Player:
     def __init__(self, name, board_size=10, opponent=None, is_computer=False):
@@ -395,13 +403,11 @@ class Game:
 
         print("Game Over!")
 
+
 def main():
     """
     Main application that runs the game and its functions
     """
-
-    Ship: Ship(ship_type, size, board)
-    
     user = Player("User")
     computer = Player("Computer", is_computer=True)
 
