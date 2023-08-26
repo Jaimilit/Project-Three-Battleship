@@ -234,19 +234,39 @@ class Board:
             print(f"{row_label}) {' '.join(self.grid[i])}")
 
     @staticmethod
-    def print_boards(board1, board2, board1_name="Player 1", board2_name="Player 2"):
+    def print_boards(board1, board2, board1_name="Player 1",
+                     board2_name="Player 2"):
         """
         Static method to print two boards side-by-side
         Board 1 is for player 1
         Board 2 is for player 2
         """
         print(f"{board1_name: <15}{'': <10}{board2_name: <15}")
-        print("   " + " ".join(map(str, range(board1.size))) + "        " + " ".join(map(str, range(board2.size))))
+        size_range_board1 = " ".join(map(str, range(board1.size)))
+        size_range_board2 = " ".join(map(str, range(board2.size)))
+
+        padding = max(0, 15 - len(size_range_board1))
+        spacing = max(
+            0,
+            len(size_range_board1) + padding + 8 - len(size_range_board2)
+        )
+
+        line = (
+            "   "
+            + size_range_board1
+            + " " * padding
+            + " " * spacing
+            + size_range_board2
+        )
+        print(line)
 
         for i in range(board1.size):
             row_letter = chr(65 + i)
-            print(f"{row_letter}) {' '.join(board1.grid[i])}     {row_letter}) {' '.join(board2.grid[i])}")
-
+            #print(f"{row_letter}) {' '.join(board1.grid[i])}     {row_letter}) {' '.join(board2.grid[i])}")
+            print(
+                f"{row_letter}) {' '.join(board1.grid[i])}     "
+                f"{row_letter}) {' '.join(board2.grid[i])}"
+            )
 
 class Player:
     def __init__(self, name, board_size=10, opponent=None, is_computer=False):
