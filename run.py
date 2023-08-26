@@ -24,6 +24,9 @@ instructions = (
 )
 
 class Ship:
+    """
+    Add items as classes
+    """
 
     SHIP_TYPES = {
         "Carrier": 5,
@@ -34,6 +37,8 @@ class Ship:
     }
 
  def __init__(self, ship_type, size, board):
+    """ use init method to store attributes that will later be changed
+    """
         self.ship_type = ship_type
         self.size = size
         self.position = []  
@@ -42,7 +47,7 @@ class Ship:
 
 def place(self, start_coordinate, orientation):
         """
-        Place the ship on the board with a given starting coordinate and orientation.
+        Place the ship on the board with a given starting coordinate and orientation
         """
         x, y = start_coordinate
         temp_positions = []
@@ -57,12 +62,34 @@ def place(self, start_coordinate, orientation):
             raise ValueError("Invalid orientation. It should be either 'horizontal' or 'vertical'.")
 
         for coord in temp_positions:
-            if coord in self.board.ships_positions():  # Assuming the Board has a ships_positions method
+            if coord in self.board.ships_positions():  
                 raise ValueError(f"A ship is already placed at coordinate {coord}")
 
         self.position = temp_positions
 
+ def is_hit(self, coordinate):
+        """
+        Checks if a shot hits a ship. If so, mark it and return True.
+        """
+        if coordinate in self.position and coordinate not in self.hit_coordinates:
+            self.hit_coordinates.add(coordinate)
+            return True
+        return False
 
+
+def is_sunk(self):
+        """
+        Return True if the ship is sunk, i.e., if all its coordinates have been hit.
+        """
+        return len(self.hit_coordinates) == self.size
+
+class Board:
+    def __init__(self, size=10):  # Default board size is 10x10
+        self.size = size
+        self.grid = [['.' for _ in range(size)] for _ in range(size)]
+        self.ships = []
+
+"""
 def create_grid_and_check_location(start_row, end_row, start_col, end_col, grid_to_check):
     for r in range(start_row, end_row):
         for c in range(start_col, end_col):
@@ -138,7 +165,7 @@ def place_computer_ships():
                         row, col = position
                         computer_grid[row][col] = "O"
                     break
-"""
+
 def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship_positions):
     global grid_size, alphabet
     debug_mode = True
@@ -163,7 +190,7 @@ def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship
         for cell in computer_row:
             print(cell, end=" ")
         print()
-"""
+
 
 def accept_valid_placement():
     """
@@ -291,6 +318,8 @@ def check_for_game_over():
     elif shots_left <= 0:
         print("Sorry, you lost! You ran out of shots, try again next time!")
         game_over = True
+"""
+
 
 def main():
     global game_over, grid, computer_grid, computer_ship_positions
