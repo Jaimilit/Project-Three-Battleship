@@ -46,11 +46,11 @@ class Ship:
         """ 
         Use init method to store attributes that will later be changed for ship
         """
-            self.ship_type = ship_type
-            self.size = size
-            self.position = []  
-            self.hit_coordinates = set()  
-            self.board = board  
+        self.ship_type = ship_type
+        self.size = size
+        self.position = []  
+        self.hit_coordinates = set()  
+        self.board = board  
 
     def place(self, start_coordinate, orientation):
             """
@@ -150,7 +150,7 @@ class Board:
             x, y = coord
             self.grid[x][y] = 'O'  
 
-     def random_place_ship(self):
+    def random_place_ship(self):
         """
         Randomly choose a ship type, create it, and place it on the board without collisions or
         going outside the board
@@ -200,7 +200,7 @@ class Board:
         else:
             if self.check_valid(coordinate):
                 self.grid[x][y] = 'M'  
-                    print("Sorry you missed! No ship was hit.")
+                print("Sorry you missed! No ship was hit.")
             return False
     
     def check_valid(self, coordinate):
@@ -214,7 +214,7 @@ class Board:
             return False
         return True
     
-     def all_ships_sunk(self):
+    def all_ships_sunk(self):
         """
         Check if all ships on the board are sunk
         """
@@ -232,7 +232,7 @@ class Board:
             row_label = chr(i + 65)  
             print(f"{row_label}) {' '.join(self.grid[i])}")
     
-     @staticmethod
+    @staticmethod
     def print_boards(board1, board2, board1_name="Player 1", board2_name="Player 2"):
         """
         Static method to print two boards side-by-side 
@@ -248,7 +248,7 @@ class Board:
 
 class Player:
     def __init__(self, name, board_size=10, opponent=None, is_computer=False):
-          """ 
+        """ 
         Use init method to store attributes that will later be changed for player
         Own board is where the player places ships
         The Guess board to keep track of shots taken
@@ -317,9 +317,9 @@ class Player:
             return msg
        
         self.guess_board.grid[x][y] = 'M'
-        return "Miss!"
+        return "Sorry you missed! No ship was hit."
 
-     @staticmethod
+    @staticmethod
     def coordinate_from_string(input_str):
         """
         Translates a string input like 'a4' to its corresponding board coordinates.
@@ -333,6 +333,92 @@ class Player:
 
         return row, col
 
+class Game:
+    def __init__(self, player1, player2):
+        """
+         Use class for game and players - 1 and 2
+        """
+        self.player1 = player1
+        self.player2 = player2
+        self.player1.opponent = self.player2
+        self.player2.opponent = self.player1
+    
+    def check_win(self):
+        """
+        Check if the given player has sunk all opponent's ships
+        and can win the game
+        """
+        if self.player1.own_board.all_ships_sunk():
+            print(f"{self.player2.name} won!")
+            return True
+        elif self.player2.own_board.all_ships_sunk():
+            print(f"{self.player1.name} won!")
+            return True
+        if self.player1.number_of_plays >= 25 or self.player2.number_of_plays >= 25:
+            print(f"Game over... You played more than 25 times!")
+            return True
+    
+    def place_ships_randomly(self, amount):
+        """
+        Places a specified number of ships randomly on both players' boards
+        """
+        for i in range(amount):
+            self.player1.own_board.random_place_ship()
+            self.player2.own_board.random_place_ship()
+    
+    def take_turn(self, current_player):
+        """
+        One player takes their turn
+        Checks if player won
+        """
+
+        print(f"{current_player.name} played {current_player.number_of_plays} times!")
+        print(f"{current_player.name}'s turn!")
+
+        current_player.take_turn()
+
+        if self.check_win():
+            return True
+        return False
+    
+    def play(self):
+        """
+        Plays the game
+        Show person's board and computer's board
+        """
+        print("\n-----Welcome to Battleships-----\n")
+        print(instructions)
+        while True:
+
+            Board.print_boards(self.player1.own_board, self.player1.guess_board, "Own board", "Computers board")
+            if self.take_turn(self.player1):
+                break
+    
+            Board.print_boards(self.player1.own_board, self.player1.guess_board, "Own board", "Computers board")
+            time.sleep(2)
+            if self.take_turn(self.player2):
+                break
+
+        print("Game Over!")
+
+def main():
+    """
+    Main application that runs the game and its functions
+    """
+
+    Ship: Ship(ship_type, size, board)
+    
+    human = Player("Human")
+    computer = Player("Computer", is_computer=True)
+
+    battle_ship_game = Game(human, computer)
+
+    battle_ship_game.place_ships_randomly(4)
+
+    battle_ship_game.play()
+
+if __name__ == "__main__":
+    main()
 
 
 """
@@ -439,10 +525,10 @@ def print_grids(player_grid, computer_grid, player_ship_positions, computer_ship
 
 
 def accept_valid_placement():
-    """
+    
     will get data from user (row & column) to place shot on grid
     writes error to user if input is incorrect
-    """
+    
 
     global alphabet
     global grid
@@ -477,9 +563,9 @@ def accept_valid_placement():
             return row, col
 
 def check_for_ship_sunk(row, col):
-    """
+    
     Checks if a ship at the given position is completely sunk.
-    """
+    
     global computer_ship_positions
 
     for ship_position in computer_ship_positions:
@@ -497,7 +583,7 @@ def check_for_ship_sunk(row, col):
             if (ship_col == col and ship_row <= row <= ship_row + ship_size - 1):
                 return False
     return True
-    """
+    
 def computer_turn():
     global computer_grid, shots_left_computer
     print("\nComputer's Turn:")
@@ -518,13 +604,13 @@ def computer_turn():
         computer_grid[row][col] = "X"  # Update the computer grid to display the hit
     shots_left_computer -= 1
     time.sleep(1)
-    """
+    
 def attempt_shot():
-    """
+    
     updates grid and ships based on where the shot was located
     tells user if their shot missed, hit a ship, and if a ship was completely
     sunk
-    """
+    
 
     global grid
     global num_of_ships_sunk
@@ -549,9 +635,9 @@ def attempt_shot():
     shots_left -= 1
 
 def check_for_game_over():
-    """
+    
     game over if all ships have been sunk or if the user has run out of shots
-    """
+    
 
     global num_of_ships_sunk
     global num_of_ships
@@ -564,7 +650,7 @@ def check_for_game_over():
     elif shots_left <= 0:
         print("Sorry, you lost! You ran out of shots, try again next time!")
         game_over = True
-"""
+
 
 
 def main():
@@ -589,3 +675,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
