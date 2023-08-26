@@ -1,6 +1,12 @@
 import random
 import time
 
+# Key
+# . water
+# O part of a ship
+# X is a hit
+# M is a miss
+
 # Variables
 grid_size = 10
 num_of_ships = 5
@@ -25,7 +31,7 @@ instructions = (
 
 class Ship:
     """
-    Add items as classes
+    Add items such a ship as a class
     """
 
     SHIP_TYPES = {
@@ -36,58 +42,114 @@ class Ship:
         "Destroyer": 2
     }
 
- def __init__(self, ship_type, size, board):
-    """ use init method to store attributes that will later be changed
-    """
-        self.ship_type = ship_type
-        self.size = size
-        self.position = []  
-        self.hit_coordinates = set()  
-        self.board = board  
-
-def place(self, start_coordinate, orientation):
+    def __init__(self, ship_type, size, board):
+        """ use init method to store attributes that will later be changed
         """
-        Place the ship on the board with a given starting coordinate and orientation
-        """
-        x, y = start_coordinate
-        temp_positions = []
+            self.ship_type = ship_type
+            self.size = size
+            self.position = []  
+            self.hit_coordinates = set()  
+            self.board = board  
 
-        if orientation == "horizontal":
-            for i in range(self.size):
-                temp_positions.append((x + i, y))
-        elif orientation == "vertical":
-            for i in range(self.size):
-                temp_positions.append((x, y + i))
-        else:
-            raise ValueError("Invalid orientation. It should be either 'horizontal' or 'vertical'.")
+    def place(self, start_coordinate, orientation):
+            """
+            Place the ship on the board with a given starting coordinate and orientation
+            """
+            x, y = start_coordinate
+            temp_positions = []
 
-        for coord in temp_positions:
-            if coord in self.board.ships_positions():  
-                raise ValueError(f"A ship is already placed at coordinate {coord}")
+            if orientation == "horizontal":
+                for i in range(self.size):
+                    temp_positions.append((x + i, y))
+            elif orientation == "vertical":
+                for i in range(self.size):
+                    temp_positions.append((x, y + i))
+            else:
+                raise ValueError("Invalid orientation. It should be either 'horizontal' or 'vertical'.")
 
-        self.position = temp_positions
+            for coord in temp_positions:
+                if coord in self.board.ships_positions():  
+                    raise ValueError(f"A ship is already placed at coordinate {coord}")
 
- def is_hit(self, coordinate):
-        """
-        Checks if a shot hits a ship. If so, mark it and return True.
-        """
-        if coordinate in self.position and coordinate not in self.hit_coordinates:
-            self.hit_coordinates.add(coordinate)
-            return True
-        return False
+            self.position = temp_positions
 
+    def is_hit(self, coordinate):
+            """
+            Checks if a shot hits a ship. If so, mark it and return True.
+            """
+            if coordinate in self.position and coordinate not in self.hit_coordinates:
+                self.hit_coordinates.add(coordinate)
+                return True
+            return False
 
-def is_sunk(self):
-        """
-        Return True if the ship is sunk, i.e., if all its coordinates have been hit.
-        """
-        return len(self.hit_coordinates) == self.size
+    def is_sunk(self):
+            """
+            Return True if the ship is sunk, i.e., if all its coordinates have been hit.
+            """
+            return len(self.hit_coordinates) == self.size
 
 class Board:
-    def __init__(self, size=10):  # Default board size is 10x10
+    """
+    Use class for board, board size 10x10 as default
+    """
+    def __init__(self, size=10): 
         self.size = size
         self.grid = [['.' for _ in range(size)] for _ in range(size)]
         self.ships = []
+    
+    def ships_positions(self):
+        """
+        Return a list of all ship coordinates on the board
+        """
+        positions = []
+        for ship in self.ships:
+            positions.extend(ship.position)
+        return positions
+    
+    def get_ship_at_coordinate(self, coordinate):
+        """
+        Return the ship at the given coordinate or None if there's no ship
+        """
+        x, y = coordinate
+        for ship in self.ships:
+            if (x, y) in ship.position:
+                return ship
+        return None
+    
+    def place_ship(self, ship, start_coordinate, orientation):
+        """
+        Attempt to place a ship on the board
+        Ensures coorindates are not out of range of the board for vertical & horizational
+        placement of ships
+        Places ships as an O on the board
+        """
+        x, y = start_coordinate
+
+        # Guard against out-of-index errors:
+        if x < 0 or x >= self.size or y < 0 or y >= self.size:
+            raise ValueError(f"Coordinates {start_coordinate} are out of the board's range.")
+
+        if orientation == "horizontal":
+            if x + ship.size > self.size:
+                raise ValueError(
+                    f"Ship cannot be placed at {start_coordinate} in {orientation} orientation. "
+                    f"It will go out of the board.")
+        elif orientation == "vertical":
+            if y + ship.size > self.size:
+                raise ValueError(
+                    f"Ship cannot be placed at {start_coordinate} in {orientation} orientation. "
+                    f"It will go out of the board.")
+        else:
+            raise ValueError("Invalid orientation. It should be either 'horizontal' or 'vertical'.")
+
+        ship.place(start_coordinate, orientation)
+        self.ships.append(ship)
+
+        for coord in ship.position:
+            x, y = coord
+            self.grid[x][y] = 'O'  
+
+
 
 """
 def create_grid_and_check_location(start_row, end_row, start_col, end_col, grid_to_check):
