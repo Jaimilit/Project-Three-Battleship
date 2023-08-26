@@ -31,7 +31,7 @@ instructions = (
 
 class Ship:
     """
-    Add items such a ship as a class
+    Use class method for items such a ship
     """
 
     SHIP_TYPES = {
@@ -43,7 +43,8 @@ class Ship:
     }
 
     def __init__(self, ship_type, size, board):
-        """ use init method to store attributes that will later be changed
+        """ 
+        Use init method to store attributes that will later be changed for ship
         """
             self.ship_type = ship_type
             self.size = size
@@ -245,7 +246,27 @@ class Board:
             row_letter = chr(65 + i)  
             print(f"{row_letter}) {' '.join(board1.grid[i])}     {row_letter}) {' '.join(board2.grid[i])}")
 
-
+class Player:
+    def __init__(self, name, board_size=10, opponent=None, is_computer=False):
+          """ 
+        Use init method to store attributes that will later be changed for player
+        Own board is where the player places ships
+        The Guess board to keep track of shots taken
+        """
+        self.name = name
+        self.own_board = Board(board_size)  
+        self.guess_board = Board(board_size)  
+        self.is_computer = is_computer
+        self.opponent = opponent
+        self.number_of_plays = 0
+    
+    def place_ship(self, ship_name, start_coordinate, orientation):
+        """
+        Allows a player to place a ship on their own board
+        """
+        ship_size = Ship.SHIP_TYPES[ship_name]
+        new_ship = Ship(ship_name, ship_size, self.own_board)
+        self.own_board.place_ship(new_ship, start_coordinate, orientation)
 
 """
 def create_grid_and_check_location(start_row, end_row, start_col, end_col, grid_to_check):
