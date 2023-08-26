@@ -262,11 +262,11 @@ class Board:
 
         for i in range(board1.size):
             row_letter = chr(65 + i)
-            #print(f"{row_letter}) {' '.join(board1.grid[i])}     {row_letter}) {' '.join(board2.grid[i])}")
             print(
                 f"{row_letter}) {' '.join(board1.grid[i])}     "
                 f"{row_letter}) {' '.join(board2.grid[i])}"
             )
+
 
 class Player:
     def __init__(self, name, board_size=10, opponent=None, is_computer=False):
@@ -310,16 +310,23 @@ class Player:
         x, y = -1, -1
         while not valid_play:
             if self.is_computer:
-                x, y = random.choice([(i, j) for i in range(self.own_board.size) for j in range(self.own_board.size)])
+                x, y = random.choice(
+                    [
+                        (i, j)
+                        for i in range(self.own_board.size)
+                        for j in range(self.own_board.size)
+                    ]
+                )
             else:
                 good_input = False
                 while not good_input:
                     try:
-                        x, y = self.coordinate_from_string(input("Please enter row A-J and column 0-9."
-                          "\nExample C6: "))
+                        prompt = ("Please enter row A-J and column 0-9.\n"
+                                  "Example C6: ")
+                        x, y = self.coordinate_from_string(input(prompt))
                         good_input = True
                     except ValueError as e:
-                        print(f"Invalid input: {e}. Please enter a valid input such as C6.")
+                        print(f"Invalid input: {e}. Enter a valid input.")
 
             valid_play = self.opponent.own_board.check_valid((x, y))
             if not valid_play:
@@ -351,10 +358,13 @@ class Player:
     @staticmethod
     def coordinate_from_string(input_str):
         """
-        Translates a string input like 'a4' to its corresponding board coordinates.
+        Translates a string input like 'a4' to its corresponding
+        board coordinates.
         Returns a tuple (row, col)
         """
-        if len(input_str) < 2 or not input_str[0].isalpha() or not input_str[1:].isdigit():
+        if len(input_str) < 2 or \
+                not input_str[0].isalpha() or \
+                not input_str[1:].isdigit():
             raise ValueError("Invalid input format")
 
         row = ord(input_str[0].upper()) - ord('A')
@@ -385,9 +395,11 @@ class Game:
         elif self.player2.own_board.all_ships_sunk():
             print(f"{self.player1.name} won!")
             return True
-        if self.player1.number_of_plays >= 25 or self.player2.number_of_plays >= 25:
-            print(f"Game over... Your 25 shots are up!")
+        if self.player1.number_of_plays >= 25 or \
+           self.player2.number_of_plays >= 25:
+            print("Game over... Your 25 shots are up!")
             return True
+
 
     def place_ships_randomly(self, amount):
         """
