@@ -267,6 +267,73 @@ class Player:
         ship_size = Ship.SHIP_TYPES[ship_name]
         new_ship = Ship(ship_name, ship_size, self.own_board)
         self.own_board.place_ship(new_ship, start_coordinate, orientation)
+    
+    def take_turn(self):
+        """
+        Represents a player's turn in a game
+        Allows a player to choose a coordinate to shoot at opponent's board
+        If the player is the computer, it chooses a random valid coordinate
+        If the player is human, it prompts the user to enter a coordinate until a valid one is provided
+        It checks if the chosen coordinate is a valid move (not already played and within the board)
+        If the move is valid, it takes a shot at the chosen coordinate on the opponent's board
+        Finally, it increments the number of plays.
+        """
+        valid_play = False
+        x, y = -1, -1
+        while not valid_play:
+            if self.is_computer:
+                x, y = random.choice([(i, j) for i in range(self.own_board.size) for j in range(self.own_board.size)])
+            else:
+                good_input = False
+                while not good_input:
+                    try:
+                        x, y = self.coordinate_from_string(input("Please enter row A-J and column 0-9."
+                          "\nExample C6 "))
+                        good_input = True
+                    except ValueError as e:
+                        print(f"Invalid input: {e}. Please enter a valid input such as C6.")
+
+            valid_play = self.opponent.own_board.check_valid((x, y))
+            if not valid_play:
+                print("That coordinate is already played or outside of the board")
+        self.take_shot((x, y), self.opponent)
+        self.number_of_plays += 1
+
+    def take_shot(self, coordinate, opponent):
+        """
+        Takes a shot at the opponent's board
+        Check if the shot hits any of the opponent's ships
+         Let's the user know if it doesn't hit, mark it as a miss
+        """
+        x, y = coordinate
+        if not self.opponent.own_board.check_valid(coordinate):
+            return "Invalid shot"
+        if opponent.own_board.check_hit((x, y)):
+            msg = "Hit!"
+            self.guess_board.grid[x][y] = 'X'
+            ship = self.opponent.own_board.get_ship_at_coordinate(coordinate)
+            if ship.is_sunk():
+                msg += f"{ship.ship_type} is sunk!"
+            return msg
+       
+        self.guess_board.grid[x][y] = 'M'
+        return "Miss!"
+
+     @staticmethod
+    def coordinate_from_string(input_str):
+        """
+        Translates a string input like 'a4' to its corresponding board coordinates.
+        Returns a tuple (row, col)
+        """
+        if len(input_str) < 2 or not input_str[0].isalpha() or not input_str[1:].isdigit():
+            raise ValueError("Invalid input format")
+
+        row = ord(input_str[0].upper()) - ord('A')
+        col = int(input_str[1:])
+
+        return row, col
+
+
 
 """
 def create_grid_and_check_location(start_row, end_row, start_col, end_col, grid_to_check):
