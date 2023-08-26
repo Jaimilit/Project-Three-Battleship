@@ -400,7 +400,6 @@ class Game:
             print("Game over... Your 25 shots are up!")
             return True
 
-
     def place_ships_randomly(self, amount):
         """
         Places a specified number of ships randomly on both players' boards
@@ -414,7 +413,8 @@ class Game:
         Player and computer take turns
         Checks if player or computer won
         """
-        print(f"{current_player.name} played {current_player.number_of_plays} times!")
+        print(f"{current_player.name} played "
+              f"{current_player.number_of_plays} times!")
         print(f"{current_player.name}'s turn!")
 
         current_player.take_turn()
@@ -431,11 +431,17 @@ class Game:
         """
         print(instructions)
         while True:
-            Board.print_boards(self.player1.own_board, self.player1.guess_board, "User's board", "Computer's board")
+            Board.print_boards(
+                self.player1.own_board, self.player1.guess_board,
+                "User's board", "Computer's board"
+            )
             if self.take_turn(self.player1):
                 break
 
-            Board.print_boards(self.player1.own_board, self.player1.guess_board, "User's board", "Computer's board")
+            Board.print_boards(
+                self.player1.own_board, self.player1.guess_board,
+                "User's board", "Computer's board"
+            )
             time.sleep(2)
             if self.take_turn(self.player2):
                 break
@@ -456,6 +462,6 @@ def main():
 
     battle_ship_game.play()
 
+
 if __name__ == "__main__":
     main()
-
