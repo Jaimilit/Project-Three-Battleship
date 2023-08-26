@@ -8,16 +8,6 @@ import time
 # M is a miss
 
 # Variables
-"""
-grid_size = 10
-num_of_ships = 5
-shots_left = 25
-game_over = False
-num_of_ships_sunk = 0
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-ship_positions = []
-grid = []
-"""
 instructions = (
     "Welcome to the Battleships game!\n\n"
     "Instructions:\n"
@@ -80,13 +70,13 @@ class Ship:
             self.position = temp_positions
 
     def is_hit(self, coordinate):
-            """
-            Checks if a shot hits a ship. If so, mark it and return True.
-            """
-            if coordinate in self.position and coordinate not in self.hit_coordinates:
-                self.hit_coordinates.add(coordinate)
-                return True
-            return False
+        """
+        Checks if a shot hits a ship. If so, mark it and return True.
+        """
+        if coordinate in self.position and coordinate not in self.hit_coordinates:
+            self.hit_coordinates.add(coordinate)
+            return True
+        return False
 
     def is_sunk(self):
             """
@@ -204,7 +194,7 @@ class Board:
         else:
             if self.check_valid(coordinate):
                 self.grid[x][y] = 'M'  
-                print("Sorry you missed! No ship was hit.")
+                #print("Sorry you missed! No ship was hit.")
             return False
     
     def check_valid(self, coordinate):
@@ -301,26 +291,27 @@ class Player:
             valid_play = self.opponent.own_board.check_valid((x, y))
             if not valid_play:
                 print("That coordinate is already played or outside of the board")
-        self.take_shot((x, y), self.opponent)
+        result = self.take_shot((x, y), self.opponent)
+        print(result)  # Print the result here
         self.number_of_plays += 1
 
     def take_shot(self, coordinate, opponent):
         """
         Takes a shot at the opponent's board
         Checks if the shot hits any of the opponent's ships
-        Let's the user know if it doesn't hit, mark it as a miss
+        Lets the user know if it hits, mark it as a hit
         """
         x, y = coordinate
         if not self.opponent.own_board.check_valid(coordinate):
             return "Invalid shot"
-        if opponent.own_board.check_hit((x, y)):
-            msg = "Hit!"
+        if opponent.own_board.check_hit(coordinate):
+            msg = "Yay! You hit a ship!"
             self.guess_board.grid[x][y] = 'X'
-            ship = self.opponent.own_board.get_ship_at_coordinate(coordinate)
+            ship = opponent.own_board.get_ship_at_coordinate(coordinate)
             if ship.is_sunk():
-                msg += f"{ship.ship_type} is sunk!"
+                msg += f" {ship.ship_type} is sunk!"
             return msg
-       
+
         self.guess_board.grid[x][y] = 'M'
         return "Sorry you missed! No ship was hit."
 
@@ -393,11 +384,10 @@ class Game:
         """
         print(instructions)
         while True:
-
             Board.print_boards(self.player1.own_board, self.player1.guess_board, "User's board", "Computer's board")
             if self.take_turn(self.player1):
                 break
-    
+            
             Board.print_boards(self.player1.own_board, self.player1.guess_board, "User's board", "Computer's board")
             time.sleep(2)
             if self.take_turn(self.player2):
