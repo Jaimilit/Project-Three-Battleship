@@ -18,7 +18,8 @@ instructions = (
     "4. '.' is water, 'X' is a hit, and 'M' is a miss.\n"
     "5. Ships will be placed randomly on the grid at the start of the game.\n"
     "6. A ship is sunk when all its parts are hit.\n"
-    "7. When all 5 ships are sunk you win the game! \n\n"
+    "7. The computer also plays against you and you tak turns."
+    "8. When all 5 ships are sunk you win the game! \n\n"
     "LET THE BATTLE BEGIN!"
 
 )
@@ -39,7 +40,7 @@ class Ship:
 
     def __init__(self, ship_type, size, board):
         """
-        Initialize a Ship object with its attributes
+        Initialize a ship object with its attributes
         """
         self.ship_type = ship_type
         self.size = size
@@ -52,9 +53,8 @@ class Ship:
         Place the ship on the board with a given starting coordinate
         and orientation
         It performs checks to ensure that the placement is valid and
-        raises errors
-        if the placement would conflict with existing ship positions
-        or if an invalid orientation is provided
+        raises errors if the placement would conflict with existing ship 
+        positions or if an invalid orientation is provided
         """
         x, y = start_coordinate
         temp_positions = []
@@ -96,7 +96,8 @@ class Ship:
 
 class Board:
     """
-    Use class for board, board size 10x10 as default
+    Use class for board 
+    Board size 10x10 as default
     """
     def __init__(self, size=10):
         self.size = size
@@ -126,7 +127,7 @@ class Board:
         """
         Attempt to place a ship on the board
         Ensures coorindates are not out of range of the board for
-        vertical & horizational
+        vertical & horizational placement
         Places ships as an O on the board
         """
         x, y = start_coordinate
@@ -241,7 +242,7 @@ class Board:
         """
         Static method to print two boards side-by-side
         Board 1 is for player 1
-        Board 2 is for player 2
+        Board 2 is for player 2 (computer)
         """
         print(f"{board1_name: <15}{'': <10}{board2_name: <15}")
         size_range_board1 = " ".join(map(str, range(board1.size)))
@@ -273,10 +274,10 @@ class Board:
 class Player:
     def __init__(self, name, board_size=10, opponent=None, is_computer=False):
         """
-        Use init method to store attributes that will later be changed for
-        player
-        Own board is where the player places ships
-        The Guess board to keep track of shots taken
+        Use init method to store attributes 
+        Own board is where the player places ships for computer
+        to play against you
+        Guess board to keep track of shots taken
         """
         self.name = name
         self.own_board = Board(board_size)
@@ -341,7 +342,7 @@ class Player:
         """
         Takes a shot at the opponent's board
         Checks if the shot hits any of the opponent's ships
-        Lets the user know if it hits, mark it as a hit
+        Let's the user know if it hits, mark it as a hit
         """
         x, y = coordinate
         if not self.opponent.own_board.check_valid(coordinate):
@@ -389,7 +390,7 @@ class Game:
         """
         Checks if the given player has sunk all opponent's ships
         and can win the game or if player has reached maximum
-        number of plays/shots
+        number of shots - 25
         """
         if self.player1.own_board.all_ships_sunk():
             print(f"{self.player2.name} won!")
@@ -413,7 +414,7 @@ class Game:
     def take_turn(self, current_player):
         """
         Player and computer take turns
-        Checks if player or computer won
+        Checks if player or computer wins
         """
         print(f"{current_player.name} played "
               f"{current_player.number_of_plays} times!")
