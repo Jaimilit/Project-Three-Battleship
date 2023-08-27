@@ -18,7 +18,7 @@ instructions = (
     "4. '.' is water, 'X' is a hit, and 'M' is a miss.\n"
     "5. Ships will be placed randomly on the grid at the start of the game.\n"
     "6. A ship is sunk when all its parts are hit.\n"
-    "7. The computer also plays against you and you tak turns."
+    "7. The computer also plays against you and you take turns."
     "8. When all 4 ships are sunk you win the game! \n\n"
     "LET THE BATTLE BEGIN!"
 
@@ -53,7 +53,7 @@ class Ship:
         Place the ship on the board with a given starting coordinate
         and orientation
         It performs checks to ensure that the placement is valid and
-        raises errors if the placement would conflict with existing ship 
+        raises errors if the placement conflicts with existing ship 
         positions or if an invalid orientation is provided
         """
         x, y = start_coordinate
@@ -241,7 +241,7 @@ class Board:
                      board2_name="Player 2"):
         """
         Static method to print two boards side-by-side
-        Board 1 is for player 1
+        Board 1 is for player 1 (user)
         Board 2 is for player 2 (computer)
         """
         print(f"{board1_name: <15}{'': <10}{board2_name: <15}")
@@ -289,6 +289,7 @@ class Player:
     def place_ship(self, ship_name, start_coordinate, orientation):
         """
         Allows player to place a ship on their own game board
+        Program does this randomly
         """
         ship_size = Ship.SHIP_TYPES[ship_name]
         new_ship = Ship(ship_name, ship_size, self.own_board)
@@ -301,7 +302,7 @@ class Player:
         opponent's/computer's board
         If the player is the computer, it chooses a random
         valid coordinate
-        If the player is human, it prompts the user to enter a
+        For the player it prompts the user to enter a
         coordinate until a valid one is provided
         It checks if the chosen coordinate is a valid move
         (not already played and within the board)
