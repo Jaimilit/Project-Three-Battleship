@@ -50,6 +50,7 @@ Let's the player know if and when they have won the game
 
 * Allow user to adjust board size 
 * Allow user to place the location of their own ships on the board
+* Allow user to choose how many ships to place on the board
 * Improve UX/UI so that the game is more visually interesting for the user
 
 # Data Model
@@ -84,6 +85,7 @@ Python was used for this program
 ## Solved Bugs
 
 * Project works as intended
+* Solved bu starting over again to add the computer as a player
 * Lots of errors of lines being too long when pushed through linter, so I needed to change my code
 
 ## Bugs Remaining
