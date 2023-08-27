@@ -37,18 +37,18 @@ What the game looks like
 Instructions for the player and the initial boards are seen. On the left is the user's board which the computer will play against and you can see where the game randomly placed ships on the board. The board on the right is where the user will play and make their guesses.
 ![Player’s game board](assets/images/instructions.png)
 The player cannot see where the ships are located on the computer's board.
-This shot also shows that the user cannot enter incorrect data
+This image also shows that the user cannot enter incorrect data
 ![Input incorrect data so game ensures the user inputs only correct data](assets/images/incorrectdata.png)
 Shows whether the user hits a ship or misses (X hits, M misses, O ship locations)
 ![Hits & misses (X hits, M misses)](assets/images/hitsandmisses.png)
 Shows the computer's turn as well so the user knows what the computer has done during its turn
 ![computer's turn](assets/images/computerturn.png)
-Lets the player know if and when they have won the game
+Let's the player know if and when they have won the game
 ![Win the game](assets/images/gameover.png)
 
 ## Future Features
 
-* Allow user to adjust board size and size of ships
+* Allow user to adjust board size 
 * Allow user to place the location of their own ships on the board
 * Improve UX/UI so that the game is more visually interesting for the user
 
@@ -92,7 +92,7 @@ Python was used for this program
 
 # Lessons
 
-* I originally created this project as a single user against the computer. The computer didn't have it's own board and/or turn. So I was able to create a basic game with just the player against a computer board. But then I wanted to challenege myself to add the computer as a player as well. However, when I tried to add the computer as another player I couldn't get it to work. I tried for what felt like forever, but nothing seemed to work. A friend suggested just starting over  and having a good outline in the beginning of what I wanted to create. He also suggested creating my project using classes for the objects such as board and player. So I started all over again, with having a better outline of what I wanted my project to look like. So it worked much better when I started from stratch, instead of incorporating a second player into what I initally created as just a single user.
+* I originally created this project as a single user against the computer. The computer didn't have it's own board and/or turn. So I was able to create a basic game with just the player playing against a computer board. But then I wanted to challenege myself to add the computer as a player as well. However, when I tried to add the computer as another player I couldn't get it to work. I tried for what felt like forever, but nothing seemed to work. A friend suggested just starting over  and having a good outline in the beginning of what I wanted to create. He also suggested creating my project using classes for the objects such as board and player. So I started all over again, with having a better outline of what I wanted my project to look like. So it worked much better when I started from stratch, instead of incorporating a second player into what I initally created as just a single user.
 * I changed the name of my project in Github midway through and then had issues pushing my code from codeanywhere back to Github. A lot of trial and errors to fix this issue. After talking with a tutor, I used Gitpod instead.
 * Because of summer holiday I spent a lot of time on this project, but with big gaps in-between. This made me struggle when I would go back to the project, I would forget things I changed or that I needed to fix. So in the future, no more big gaps while working on a project
 * Because of the things above, I know that I really need to improve my git comments to have better descriptions and more specific descriptions of what I have done
