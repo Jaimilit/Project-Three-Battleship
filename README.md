@@ -122,7 +122,7 @@ Steps for deployment:
     * git push heroku main
 
 * Link can be found here: 
-* Site is deployed: ![Battleship Game](https://git.heroku.com/project-three-battleship.git)
+* Site is deployed: ![Battleship Game](https://project-three-battleship-42bd9eb292ca.herokuapp.com/)
 
 # Credits
 
