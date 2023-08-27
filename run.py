@@ -9,7 +9,7 @@ import time
 
 # Variables
 instructions = (
-    
+
     "Welcome to the Battleships game!\n\n"
     "Instructions:\n"
     "1. You have 25 shots to take down 4 ships of different sizes.\n"
@@ -53,7 +53,7 @@ class Ship:
         Place the ship on the board with a given starting coordinate
         and orientation
         It performs checks to ensure that the placement is valid and
-        raises errors if the placement conflicts with existing ship 
+        raises errors if the placement conflicts with existing ship
         positions or if an invalid orientation is provided
         """
         x, y = start_coordinate
@@ -96,7 +96,7 @@ class Ship:
 
 class Board:
     """
-    Use class for board 
+    Use class for board
     Board size 10x10 as default
     """
     def __init__(self, size=10):
@@ -274,7 +274,7 @@ class Board:
 class Player:
     def __init__(self, name, board_size=10, opponent=None, is_computer=False):
         """
-        Use init method to store attributes 
+        Use init method to store attributes
         Own board is where the player places ships for computer
         to play against you
         Guess board to keep track of shots taken
